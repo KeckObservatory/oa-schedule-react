@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import { PaginationTable } from "./components/Table/PaginationTable";
+import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import ErrorBoundry from "./components/ErrorBoundry"
 
@@ -46,7 +46,6 @@ class App extends Component {
     const { schedule, columns } = this.state;
 
     if (schedule.length === 0) {
-          console.log('yes')
           return <div />
         }
 
@@ -55,7 +54,7 @@ class App extends Component {
       <div>
         <UploadFile onNewSchedule={this.onNewSchedule}/>
         <ErrorBoundry>
-          <PaginationTable dat={schedule} cols={columns} />
+          <Table dat={schedule} cols={columns} />
         </ErrorBoundry>
       </div>
     );
