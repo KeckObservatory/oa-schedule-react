@@ -1,11 +1,10 @@
 import React, { useMemo }  from 'react'
-import { useTable, useGlobalFilter, useFilters } from 'react-table'
+import { useTable, useFilters } from 'react-table'
 import { Checkbox } from './CheckBox'
 import './Table.css'
-import { GlobalFilter } from './GlobalFilter'
 import { ColumnFilter } from './ColumnFilter'
 
-export const Table = ({dat, cols}) => {
+export const Table = ({dat, cols, getCellProps}) => {
 
   const columns = useMemo(() => cols, [cols])
   const data = useMemo(() => dat, [dat])
@@ -24,21 +23,15 @@ export const Table = ({dat, cols}) => {
     rows,
     prepareRow,
     getToggleHideAllColumnsProps,
-    state,
-    setGlobalFilter,
   }  = useTable({
     columns,
     data,
     defaultColumn
   },
-  useFilters,
-  useGlobalFilter)
-
-  const { globalFilter } = state
+  useFilters)
 
   return (
     <>
-      <GlobalFilter filter ={globalFilter} setFilter={setGlobalFilter} />
       <div>
         <div>
           <Checkbox {...getToggleHideAllColumnsProps()}/> Toggle All
@@ -61,7 +54,7 @@ export const Table = ({dat, cols}) => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  return <td {...cell.getCellProps([getCellProps(cell)])}>{cell.render('Cell')}</td>
                 })}
               </tr>
             )

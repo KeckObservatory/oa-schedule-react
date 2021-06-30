@@ -20,3 +20,17 @@ table th, tfoot td {
   background-color: #04AA6D;
   color: white;
 }
+
+
+input[type="checkbox"]{
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: grey;
+    width: 10px;
+    height: 10px;
+    border: none;
+    position: relative;
+}
+input[type="checkbox"]:default {
+    content: 'X'
+}

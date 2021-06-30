@@ -12,8 +12,7 @@ export const ColumnFilter = ({ column }) => {
 
   return (
     <span>
-      Search: {' '}
-      <input value={value || ''} onChange={(e) => {
+      <input size="4" value={value || ''} onChange={(e) => {
         setValue(e.target.value)
         onChange(e.target.value)
       }}

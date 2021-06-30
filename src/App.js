@@ -54,7 +54,19 @@ class App extends Component {
       <div>
         <UploadFile onNewSchedule={this.onNewSchedule}/>
         <ErrorBoundry>
-          <Table dat={schedule} cols={columns} />
+          <Table dat={schedule} cols={columns}
+            getCellProps={cellInfo => ({
+              style: {
+                backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "orange" :
+                                 ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "blue" :
+                                 ["X", "L"].includes(cellInfo.value) ? "purple" :
+                                 cellInfo.value === "OM" ? "yellow" :
+                                 cellInfo.value === "HQ" ? "green" :
+                                 cellInfo.value === "H" ? "#7FFFD4" :
+                                 null
+
+              },
+            })}/>
         </ErrorBoundry>
       </div>
     );
