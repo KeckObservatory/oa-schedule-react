@@ -42,7 +42,7 @@ export const Table = ({dat, cols, getCellProps}) => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map( (column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}<input type='checkbox' {...column.getToggleHiddenProps()} />
+                <th {...column.getHeaderProps()}><div className="checkmark"><input type='checkbox' {...column.getToggleHiddenProps()} /></div><br></br>{column.render('Header')}
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>))}
             </tr>

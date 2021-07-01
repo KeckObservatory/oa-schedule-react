@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
-import './App.css';
 import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import ErrorBoundry from "./components/ErrorBoundry"
+import "./App.css"
 
 class App extends Component {
   constructor() {

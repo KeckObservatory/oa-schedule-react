@@ -1,5 +1,5 @@
 table {
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: "Verdana", Helvetica, sans-serif; */
   border-collapse: collapse;
   width: 100%;
 }
@@ -9,28 +9,51 @@ table td, #table th {
   padding: 5px;
 }
 
-table tr:nth-child(even){background-color: #f2f2f2;}
+table tr:nth-child(4n+1){background-color: #FFFFFF;}
+table tr:nth-child(2n+2){background-color: #CADAED;}
+table tr:nth-child(4n+3){background-color: #97B4D3;}
 
-table tr:hover {background-color: #ddd;}
+table tr:hover {background-color: #456C98;}
+table tr:hover {color: #FFFFFF;}
 
 table th, tfoot td {
   padding-top: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #04AA6D;
+  background-color: #2C5583;
   color: white;
+  border: 1px solid #ddd;
 }
 
 
 input[type="checkbox"]{
     -webkit-appearance: initial;
     appearance: initial;
-    background: grey;
+    background: #CADAED;
     width: 10px;
     height: 10px;
     border: none;
     position: relative;
 }
-input[type="checkbox"]:default {
-    content: 'X'
+
+input[type="checkbox"]:before {
+    content: '-';
+    position: absolute;
+    top: -0.25em;
+    left: .1em;
+}
+
+input[type="checkbox"].toggleAll:before {
+    content: '+';
+    position: absolute;
+    top: -0.2em;
+    left: .05em;
+}
+
+div.checkmark {
+  text-align: right;
+  max-height: 1px;
+  height: 100%;
 }
