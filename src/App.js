@@ -28,7 +28,7 @@ class App extends Component {
            Header: key,
            Footer: key,
            accessor: key,
-           Cell: ({ value }) => { return format(new Date(value), 'dd/MM/yyy')}
+           Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')} //TODO convert UT day to HST
          }
         )
       }else{

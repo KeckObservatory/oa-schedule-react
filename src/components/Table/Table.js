@@ -1,5 +1,5 @@
 import React, { useMemo }  from 'react'
-import { useTable, useFilters } from 'react-table'
+import { useTable, useFilters} from 'react-table'
 import { Checkbox } from './CheckBox'
 import './Table.css'
 import { ColumnFilter } from './ColumnFilter'
@@ -15,6 +15,13 @@ export const Table = ({dat, cols, getCellProps}) => {
     }
   }, [])
 
+  const telSchedule = (date) => {
+    const day = new Date(date)
+    const month = day.getMonth() + 1
+    const linkDate = day.getFullYear() + '-' + month + '-' + day.getDate()
+    window.open(window.location='https://www2.keck.hawaii.edu/observing/keckSchedule/keckSchedule.php?cmd=getSchedule&date=' + linkDate)
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -26,7 +33,8 @@ export const Table = ({dat, cols, getCellProps}) => {
   }  = useTable({
     columns,
     data,
-    defaultColumn
+    defaultColumn,
+    telSchedule
   },
   useFilters)
 
@@ -52,7 +60,7 @@ export const Table = ({dat, cols, getCellProps}) => {
           {rows.map(row=> {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} onClick={() =>  telSchedule(row.original.Date)}>
                 {row.cells.map((cell) => {
                   return <td {...cell.getCellProps([getCellProps(cell)])}>{cell.render('Cell')}</td>
                 })}
