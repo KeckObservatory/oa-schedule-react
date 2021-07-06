@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import ErrorBoundry from "./components/ErrorBoundry"
+import { format } from "date-fns"
 import "./App.css"
 
 class App extends Component {
@@ -10,7 +11,9 @@ class App extends Component {
     super()
     this.state = {
       schedule: [],
-      columns: []
+      columns: [],
+      route: 'signin',
+      isSignedIn: false
     }
   }
 
@@ -19,7 +22,16 @@ class App extends Component {
     const first = schedule[0];
 
     for (var key in first) {
-      if (!key.includes('.')) {
+      if (key==='Date'){
+        COLUMNS.push(
+         {
+           Header: key,
+           Footer: key,
+           accessor: key,
+           Cell: ({ value }) => { return format(new Date(value), 'dd/MM/yyy')}
+         }
+        )
+      }else{
         COLUMNS.push(
          {
            Header: key,
@@ -38,12 +50,21 @@ class App extends Component {
       .then(data => this.setState({ schedule: [...data], columns: [...this.cols(data)] }));
   }
 
+  onRouteChange = (route) => {
+    if (route === 'signout') {
+      this.setState({isSignedIn: false})
+    }else if (route === 'signin') {
+      this.setState({isSignedIn: true})
+    }
+    this.setState({route: route})
+  }
+
   onNewSchedule = (data) => {
     this.setState({ schedule: [...data], columns: [...this.cols(data)] })
   }
 
   render() {
-    const { schedule, columns } = this.state;
+    const { isSignedIn, schedule, columns } = this.state;
 
     if (schedule.length === 0) {
           return <div />
@@ -52,7 +73,7 @@ class App extends Component {
 
     return (
       <div>
-        <UploadFile onNewSchedule={this.onNewSchedule}/>
+        <UploadFile isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} onNewSchedule={this.onNewSchedule}/>
         <ErrorBoundry>
           <Table dat={schedule} cols={columns}
             getCellProps={cellInfo => ({

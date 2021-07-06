@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 // import { Button } from "semantic-ui-react";
 
-export const UploadFile = ({ onNewSchedule }) => {
+export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
 
@@ -26,14 +26,21 @@ export const UploadFile = ({ onNewSchedule }) => {
      .then(data => onNewSchedule(data));
   }
 
-	return(
-    <div>
-    	<input type="file" name="file" onChange={changeHandler} />
-    	<div>
-    		<button onClick={handleSubmission}>Submit</button>
-    	</div>
-    </div>
-	)
+  if(isSignedIn) {
+  	return(
+      <div>
+      	<input type="file" name="file" onChange={changeHandler} />
+      	<div>
+      		<button onClick={handleSubmission}>Submit</button>
+      	</div>
+        <p onClick={() => onRouteChange('signout')} className='tr f3 link dim black underline pa3 pointer'>Sign Out</p>
+      </div>
+  	)
+  }else{
+    return(
+      <p onClick={() => onRouteChange('signin')} className=' tr f3 link dim black underline pa3 pointer'>Sign In</p>
+    )
+  }
 }
 
 
