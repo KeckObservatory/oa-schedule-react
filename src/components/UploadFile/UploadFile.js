@@ -28,17 +28,17 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
 
   if(isSignedIn) {
   	return(
-      <div>
+      <div className='tr'>
       	<input type="file" name="file" onChange={changeHandler} />
-      	<div>
-      		<button onClick={handleSubmission}>Submit</button>
-      	</div>
-        <p onClick={() => onRouteChange('signout')} className='tr f3 link dim black underline pa3 pointer'>Sign Out</p>
+      	<button onClick={handleSubmission}>Submit</button>
+        <span onClick={() => onRouteChange('signout')} className='tr f3 link dim black underline pa3 pointer'>Sign Out</span>
       </div>
   	)
   }else{
     return(
-      <p onClick={() => onRouteChange('signin')} className=' tr f3 link dim black underline pa3 pointer'>Sign In</p>
+      <div className='tr'>
+        <span onClick={() => onRouteChange('signin')} className=' tr f3 link dim black underline pa3 pointer'>Sign In</span>
+      </div>
     )
   }
 }

@@ -19,7 +19,7 @@ export const Table = ({dat, cols, getCellProps}) => {
     const day = new Date(date)
     const month = day.getMonth() + 1
     const linkDate = day.getFullYear() + '-' + month + '-' + day.getDate()
-    window.open(window.location='https://www2.keck.hawaii.edu/observing/keckSchedule/keckSchedule.php?cmd=getSchedule&date=' + linkDate)
+    window.open('https://www2.keck.hawaii.edu/observing/keckSchedule/keckSchedule.php?cmd=getSchedule&date=' + linkDate, "_blank")
   }
 
   const {
