@@ -1,23 +1,32 @@
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
+import DateSelector from "./components/DateSelector/DateSelector"
 import ErrorBoundry from "./components/ErrorBoundry"
 import { format } from "date-fns"
 import "./App.css"
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      schedule: [],
-      columns: [],
-      route: 'signin',
-      isSignedIn: false
+function App () {
+  const [schedule, setSchedule] = useState([])
+  const [columns, setColumns] = useState([])
+  //TODO figure out why I have to ignore this
+  // eslint-disable-next-line
+  const [route, setRoute] = useState('signin')
+  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
+
+  const filteredSchedule = () => {
+    if(startDate !== null && endDate !== null){
+      return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
+    }else{
+      return (schedule);
     }
   }
 
-  cols = (schedule) => {
+  const cols = (schedule) => {
     const COLUMNS = [];
     const first = schedule[0];
 
@@ -44,54 +53,56 @@ class App extends Component {
     return COLUMNS;
   }
 
-  componentDidMount() {
-    fetch("http://localhost:5000/")
+  useEffect(() => {
+    fetch("http://192.168.0.21:5000/")
       .then(response => response.json())
-      .then(data => this.setState({ schedule: [...data], columns: [...this.cols(data)] }));
-  }
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+      });
+  }, [])
 
-  onRouteChange = (route) => {
+  const onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false})
+      setIsSignedIn(false)
     }else if (route === 'signin') {
-      this.setState({isSignedIn: true})
+      setIsSignedIn(true)
     }
-    this.setState({route: route})
+    setRoute(route)
   }
 
-  onNewSchedule = (data) => {
-    this.setState({ schedule: [...data], columns: [...this.cols(data)] })
+  const onNewSchedule = (data) => {
+    setSchedule([...data])
+    setColumns([...cols(data)])
   }
 
-  render() {
-    const { isSignedIn, schedule, columns } = this.state;
-
-    if (schedule.length === 0) {
-          return <div />
-        }
+  if (schedule.length === 0) {
+        return <div />
+      }
 
 
-    return (
-      <div>
-        <UploadFile isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} onNewSchedule={this.onNewSchedule}/>
-        <ErrorBoundry>
-          <Table dat={schedule} cols={columns}
-            getCellProps={cellInfo => ({
-              style: {
-                backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "orange" :
-                                 ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "blue" :
-                                 ["X", "L"].includes(cellInfo.value) ? "purple" :
-                                 cellInfo.value === "OM" ? "yellow" :
-                                 cellInfo.value === "HQ" ? "green" :
-                                 cellInfo.value === "H" ? "#7FFFD4" :
-                                 null
+  return (
+    <div>
+      <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
+      <ErrorBoundry>
+        <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+        <Table dat={filteredSchedule()} cols={columns}
+          getCellProps={cellInfo => ({
+            style: {
+              backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
+                               ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "#7272FD" :
+                               ["X", "L"].includes(cellInfo.value) ? "#D680D6" :
+                               cellInfo.value === "OM" ? "#FFFF64" :
+                               cellInfo.value === "HQ" ? "#2EB22E" :
+                               cellInfo.value === "H" ? "#00D897" :
+                               null
 
-              },
-            })}/>
-        </ErrorBoundry>
-      </div>
-    );
-  }
+            },
+          })}/>
+      </ErrorBoundry>
+    </div>
+  );
+
 }
 
 

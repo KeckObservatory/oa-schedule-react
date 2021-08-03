@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-// import { Button } from "semantic-ui-react";
 
 export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
 

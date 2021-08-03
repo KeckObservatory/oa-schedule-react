@@ -2,6 +2,7 @@ table {
   /* font-family: "Verdana", Helvetica, sans-serif; */
   border-collapse: collapse;
   width: 100%;
+  text-align: center;
 }
 
 table td, #table th {
@@ -9,9 +10,17 @@ table td, #table th {
   padding: 5px;
 }
 
-table tr:nth-child(4n+1){background-color: #FFFFFF;}
-table tr:nth-child(2n+2){background-color: #CADAED;}
-table tr:nth-child(4n+3){background-color: #97B4D3;}
+table tr.SUN, tr.SAT {
+  background-color: #97B4D3;
+}
+
+table tr.MON, tr.WED, tr.FRI {
+  background-color: #FFFFFF;
+}
+
+table tr.TUE, tr.THU {
+  background-color: #C6D8EB;
+}
 
 table tr:hover {background-color: #456C98;}
 table tr:hover {color: #FFFFFF;}
@@ -25,8 +34,8 @@ table th, tfoot td {
   background-color: #2C5583;
   color: white;
   border: 1px solid #ddd;
+  border-top: none
 }
-
 
 input[type="checkbox"]{
     -webkit-appearance: initial;
@@ -45,15 +54,18 @@ input[type="checkbox"]:before {
     left: .1em;
 }
 
-input[type="checkbox"].toggleAll:before {
-    content: '+';
-    position: absolute;
-    top: -0.2em;
-    left: .05em;
-}
-
 div.checkmark {
   text-align: right;
   max-height: 1px;
   height: 100%;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
+div.isobuttons {
+  display: inline-block;
 }

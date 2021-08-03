@@ -1,10 +1,10 @@
 import React, { useMemo }  from 'react'
 import { useTable, useFilters} from 'react-table'
-import { Checkbox } from './CheckBox'
 import './Table.css'
 import { ColumnFilter } from './ColumnFilter'
+import { format } from "date-fns"
 
-export const Table = ({dat, cols, getCellProps}) => {
+export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
 
   const columns = useMemo(() => cols, [cols])
   const data = useMemo(() => dat, [dat])
@@ -22,6 +22,19 @@ export const Table = ({dat, cols, getCellProps}) => {
     window.open('https://www2.keck.hawaii.edu/observing/keckSchedule/keckSchedule.php?cmd=getSchedule&date=' + linkDate, "_blank")
   }
 
+  const toggleAllCols = () => {
+    toggleHideAllColumns(false)
+  }
+
+  const isolateColumn = (allColumns, name) => {
+    hiddenColumns = allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== name).map(column => column.id)
+    setHiddenColumns(hiddenColumns)
+  }
+
+  // const isolateColumn = (line) => {
+  //   console.log(line)
+  // }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -29,21 +42,39 @@ export const Table = ({dat, cols, getCellProps}) => {
     footerGroups,
     rows,
     prepareRow,
-    getToggleHideAllColumnsProps,
+    allColumns,
+    setHiddenColumns,
+    toggleHideAllColumns
   }  = useTable({
     columns,
     data,
     defaultColumn,
-    telSchedule
+    telSchedule,
+    isolateColumn,
+    toggleAllCols,
+    initialState: {
+      hiddenColumns: hiddenColumns
+    }
   },
   useFilters)
 
   return (
     <>
-      <div>
+    <div>
+      Start date: {format(new Date(data[0].Date), 'MM/dd/yyy')} End date: Start date: {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
+    </div>
+      <div className="bb b--white">
         <div>
-          <Checkbox {...getToggleHideAllColumnsProps()}/> Toggle All
+          <button onClick = {toggleAllCols}>Show All</button>
         </div>
+      {allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG').map(column => {
+        return(
+          <div key={column.id} className="isobuttons">
+            <label>
+              <button onClick={(e) => isolateColumn(allColumns, column.id, e)}>{column.id}</button>
+            </label>
+          </div>)
+        })}
       </div>
       <table {...getTableProps()}>
         <thead>
@@ -60,7 +91,7 @@ export const Table = ({dat, cols, getCellProps}) => {
           {rows.map(row=> {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()} onClick={() =>  telSchedule(row.original.Date)}>
+              <tr className={row.original.DOW} {...row.getRowProps()} onClick={(e) =>  telSchedule(row.original.Date, e)}>
                 {row.cells.map((cell) => {
                   return <td {...cell.getCellProps([getCellProps(cell)])}>{cell.render('Cell')}</td>
                 })}
