@@ -61,19 +61,17 @@ export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
   return (
     <>
     <div>
-      Start date: {format(new Date(data[0].Date), 'MM/dd/yyy')} End date: Start date: {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
+      Current schedule start date: {format(new Date(data[0].Date), 'MM/dd/yyy')} End date: {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
     </div>
       <div className="bb b--white">
-        <div>
-          <button onClick = {toggleAllCols}>Show All</button>
-        </div>
-      {allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG').map(column => {
-        return(
-          <div key={column.id} className="isobuttons">
-            <label>
-              <button onClick={(e) => isolateColumn(allColumns, column.id, e)}>{column.id}</button>
-            </label>
-          </div>)
+        <button onClick = {toggleAllCols}>Show All</button>
+        {allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG').map(column => {
+          return(
+            <div key={column.id} className="isobuttons">
+              <label>
+                <button onClick={(e) => isolateColumn(allColumns, column.id, e)}>{column.id}</button>
+              </label>
+            </div>)
         })}
       </div>
       <table {...getTableProps()}>

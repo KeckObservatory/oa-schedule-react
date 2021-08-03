@@ -36,26 +36,11 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
   }else{
     return(
       <div className='tr'>
-        <span onClick={() => onRouteChange('signin')} className=' tr f3 link dim black underline pa3 pointer'>Sign In</span>
+        <span className=' tr f3 link dim black underline pa3 pointer'>Admin</span>
       </div>
     )
   }
 }
 
 
-
-//   return (
-//     <Button
-//       onClick={async () => {
-//         const response = await fetch('/update_schedule', {
-//           method: 'POST'
-//         });
-//         if (response.ok) {
-//           console.log("response worked")
-//       }
-//     }}
-//     >
-//       submit
-//     </Button>
-//   )
-// }
+//TODO add onClick={() => onRouteChange('signin')}  back to admin button after testing
