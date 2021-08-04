@@ -4,6 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 const DateSelector = ({ dateRange, setDateRange }) => {
   const [startDate, endDate] = dateRange;
   return(
+    <div>
+      Enter a date range
+    </div>
     <DatePicker
       selectsRange={true}
       startDate={startDate}
