@@ -5,15 +5,17 @@ const DateSelector = ({ dateRange, setDateRange }) => {
   const [startDate, endDate] = dateRange;
   return(
     <div>
-      Enter a date range
+      <div>
+        Enter a date range
+      </div>
+      <DatePicker
+        selectsRange={true}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={(update) => {setDateRange(update);}} isClearable={true}
+        monthsShown={2}
+      />
     </div>
-    <DatePicker
-      selectsRange={true}
-      startDate={startDate}
-      endDate={endDate}
-      onChange={(update) => {setDateRange(update);}} isClearable={true}
-      monthsShown={2}
-    />
   )
 }
 
