@@ -1,8 +1,17 @@
+.tablewrap {
+  overflow-x: auto;
+  height: 85vh;
+}
+
 table {
-  /* font-family: "Verdana", Helvetica, sans-serif; */
   border-collapse: collapse;
-  width: 100%;
   text-align: center;
+  width: 100%;
+}
+
+th {
+  position: sticky;
+  top: 0;
 }
 
 table td, #table th {
@@ -10,7 +19,8 @@ table td, #table th {
   padding: 5px;
 }
 
-table tr.SUN, tr.SAT {
+
+/* table tr.SUN, tr.SAT {
   background-color: #97B4D3;
 }
 
@@ -20,6 +30,10 @@ table tr.MON, tr.WED, tr.FRI {
 
 table tr.TUE, tr.THU {
   background-color: #C6D8EB;
+} */
+
+table tr {
+  background-color: #FFFFFF;
 }
 
 table tr:hover {background-color: #456C98;}
@@ -60,12 +74,8 @@ div.checkmark {
   height: 100%;
 }
 
-th {
-  background: white;
-  position: sticky;
-  top: 0;
-}
 
-div.isobuttons {
+
+/* div.isobuttons {
   display: inline-block;
-}
+} */

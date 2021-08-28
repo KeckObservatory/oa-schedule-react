@@ -37,7 +37,7 @@ function App () {
            Header: key,
            Footer: key,
            accessor: key,
-           Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')} //TODO convert UT day to HST
+           Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')}
          }
         )
       }else{
@@ -45,7 +45,7 @@ function App () {
          {
            Header: key,
            Footer: key,
-           accessor: key,
+           accessor: key
          }
         )
       }
@@ -95,6 +95,8 @@ function App () {
                                cellInfo.value === "OM" ? "#FFFF64" :
                                cellInfo.value === "HQ" ? "#2EB22E" :
                                cellInfo.value === "H" ? "#00D897" :
+                               // cellInfo.value === null ? "#FFFFFF":
+                               // (cellInfo.value.toString().startsWith('O') && cellInfo.value.length < 4) ? "#FFFFFF":
                                null
 
             },

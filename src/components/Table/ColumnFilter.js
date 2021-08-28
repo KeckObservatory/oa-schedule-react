@@ -10,9 +10,11 @@ export const ColumnFilter = ({ column }) => {
     setFilter(value || undefined)
   }, 300)
 
+  const input = column.Header.length - 1
+
   return (
     <span>
-      <input size="4" value={value || ''} onChange={(e) => {
+      <input size={input.toString()} value={value || ''} onChange={(e) => {
         setValue(e.target.value)
         onChange(e.target.value)
       }}

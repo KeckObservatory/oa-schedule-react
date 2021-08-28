@@ -64,49 +64,62 @@ export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
       Current schedule start date: {format(new Date(data[0].Date), 'MM/dd/yyy')} End date: {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
     </div>
       <div className="bb b--white">
-        <button onClick = {toggleAllCols}>Show All</button>
-        {allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG').map(column => {
-          return(
-            <div key={column.id} className="isobuttons">
-              <label>
-                <button onClick={(e) => isolateColumn(allColumns, column.id, e)}>{column.id}</button>
-              </label>
-            </div>)
-        })}
+        <br/>
+        <label>Show schedule for:</label>
+        <select name="names" id="names" onChange={(e) => {
+            const selection = document.getElementById("names").options[document.getElementById("names").selectedIndex].value
+            if (selection === "All") {
+              toggleAllCols()
+            }else{
+              isolateColumn(allColumns, selection, e)
+            }
+          }}>
+          <option value="All">All</option>
+          {allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG').map(column => {
+            return(<option value={column.id}>{column.id}</option>)
+          })}
+        </select>
       </div>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map( (column) => (
-                <th {...column.getHeaderProps()}><div className="checkmark"><input type='checkbox' {...column.getToggleHiddenProps()} /></div><br></br>{column.render('Header')}
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </th>))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row=> {
-            prepareRow(row)
-            return (
-              <tr className={row.original.DOW} {...row.getRowProps()} onClick={(e) =>  telSchedule(row.original.Date, e)}>
-                {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps([getCellProps(cell)])}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            )
-            })}
-        </tbody>
-        <tfoot>
-          {footerGroups.map((footerGroup) => (
-              <tr {...footerGroup.getFooterGroupProps()}>
-                {footerGroup.headers.map(column => (
-                    <td {...column.getFooterProps}>{column.render('Footer')}</td>
-                  ))}
+      <div className="tablewrap">
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map( (column) => (
+                  <th {...column.getHeaderProps()}><div className="checkmark"><input type='checkbox' {...column.getToggleHiddenProps()} /></div><br></br>{column.render('Header')}
+                    <div>{column.canFilter ? column.render('Filter') : null}</div>
+                  </th>))}
               </tr>
             ))}
-        </tfoot>
-      </table>
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row=> {
+              prepareRow(row)
+              return (
+                <tr className={row.original.DOW} {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return <td {...cell.getCellProps([getCellProps(cell)])} onClick={(e) => {
+                      if (cell.column.Header==="Date") {
+                        telSchedule(row.original.Date, e)
+                      }
+                    }}>
+                    {cell.render('Cell')}</td>
+                  })}
+                </tr>
+              )
+              })}
+          </tbody>
+          <tfoot>
+            {footerGroups.map((footerGroup) => (
+                <tr {...footerGroup.getFooterGroupProps()}>
+                  {footerGroup.headers.map(column => (
+                      <td {...column.getFooterProps}>{column.render('Footer')}</td>
+                    ))}
+                </tr>
+              ))}
+          </tfoot>
+        </table>
+      </div>
   </>
   )
 }
