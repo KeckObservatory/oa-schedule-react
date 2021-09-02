@@ -16,7 +16,7 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
   	formData.append('file', selectedFile);
 
   	fetch(
-  		'http://localhost:5000/update_schedule',
+  		'http://98.151.209.95:5000/update_schedule',
   		{
   			method: 'POST',
         body: formData

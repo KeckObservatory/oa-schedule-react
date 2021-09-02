@@ -3,6 +3,7 @@ import { useTable, useFilters} from 'react-table'
 import './Table.css'
 import { ColumnFilter } from './ColumnFilter'
 import { format } from "date-fns"
+import { IndividualDownload } from "./IndividualDownload"
 
 export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
 
@@ -79,6 +80,8 @@ export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
               return(<option value={column.id}>{column.id}</option>)
             })}
           </select>
+        {console.log()}
+        <IndividualDownload names={allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG')} />
         </div>
         <div className="tablewrap">
           <table {...getTableProps()}>
