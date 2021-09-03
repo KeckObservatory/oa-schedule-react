@@ -64,7 +64,7 @@ export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
       <div className="bb b--white">
         <div className="grid-container">
           <div className="grid-item">
-            Current schedule start date: {format(new Date(data[0].Date), 'MM/dd/yyy')} End date: {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
+            Current schedule range: {format(new Date(data[0].Date), 'MM/dd/yyy')} to {format(new Date(data[data.length -1].Date), 'MM/dd/yyy')}
           </div>
           <div className="grid-item">
             Show schedule for:

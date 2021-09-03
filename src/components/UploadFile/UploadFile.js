@@ -36,7 +36,7 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
   }else{
     return(
       <div className='tr'>
-        <span className=' tr f3 link dim black underline pa3 pointer'>Admin</span>
+        <span className=' tr f5 link dim black underline pointer'>Admin</span>
       </div>
     )
   }

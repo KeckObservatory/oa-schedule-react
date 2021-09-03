@@ -88,9 +88,6 @@ function App () {
           <div className="grid-item">
             <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
           </div>
-          <div className="grid-item b">
-            OA Schedule
-          </div>
           <div className="grid-item">
             <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
           </div>
