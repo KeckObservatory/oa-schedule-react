@@ -1,6 +1,11 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
 .tablewrap {
   overflow-x: auto;
-  height: 86vh;
+  height: 92vh;
 }
 
 table {

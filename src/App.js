@@ -83,9 +83,15 @@ function App () {
 
   return (
     <div>
-      <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
       <ErrorBoundry>
-        <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+        <div className="grid-container">
+          <div className="grid-item">
+            <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+          </div>
+          <div className="grid-item">
+            <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
+          </div>
+        </div>
         <Table dat={filteredSchedule()} cols={columns}
           getCellProps={cellInfo => ({
             style: {

@@ -4,3 +4,9 @@ body{
   font-size: small;
   overflow: hidden;
 }
+
+.grid-container {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
