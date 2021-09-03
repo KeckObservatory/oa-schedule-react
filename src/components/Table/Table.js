@@ -3,7 +3,7 @@ import { useTable, useFilters} from 'react-table'
 import './Table.css'
 import { ColumnFilter } from './ColumnFilter'
 import { format } from "date-fns"
-import { IndividualDownload } from "./IndividualDownload"
+import { IndividualDownload } from "../IndividualDownload/IndividualDownload"
 
 export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
 

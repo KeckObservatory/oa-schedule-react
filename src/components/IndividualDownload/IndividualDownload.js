@@ -5,6 +5,17 @@ Modal.setAppElement('#root');
 
 export const IndividualDownload = ({names}) => {
 
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -45,7 +56,8 @@ export const IndividualDownload = ({names}) => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
+        style={customStyles}
+        contentLabel="Downloads"
       >
         <h2>Choose a schedule to download</h2>
         {names.map(name => {
