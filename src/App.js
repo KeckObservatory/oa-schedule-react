@@ -54,7 +54,7 @@ function App () {
   }
 
   useEffect(() => {
-    fetch("http://vm-www3build:53872/")
+    fetch("https://vm-www3build:53872/")
       .then(response => response.json())
       .then(data => {
         setSchedule([...data])
