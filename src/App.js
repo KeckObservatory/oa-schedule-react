@@ -60,6 +60,12 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
+    fetch("https://vm-www3build:53872/observers")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+      });
   }, [])
 
   const onRouteChange = (route) => {
