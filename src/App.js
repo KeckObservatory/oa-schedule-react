@@ -71,6 +71,7 @@ function App () {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
+        console.log(data.Alias);
         if(data.Alias==="jpelletier"){
           setIsAdmin(true)
         }else{
