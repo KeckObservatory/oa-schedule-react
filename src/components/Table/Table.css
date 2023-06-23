@@ -39,6 +39,8 @@ table tr.TUE, tr.THU {
 
 table tr {
   background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 0;
 }
 
 table tr:hover {background-color: #456C98;}
