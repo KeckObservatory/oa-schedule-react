@@ -13,9 +13,7 @@ function App () {
   const [holidays, setHolidays] = useState([])
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
-  const [route, setRoute] = useState('signin')
   const [isAdmin, setIsAdmin] = useState(false)
-  const [isSignedIn, setIsSignedIn] = useState(false)
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
@@ -70,6 +68,13 @@ function App () {
   }, [])
 
   useEffect(() => {
+    fetch("https://vm-www3build:53872/")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+        findHolidays(data)
+      });
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
@@ -79,13 +84,6 @@ function App () {
           setIsAdmin(false)
         }
       });
-    fetch("https://vm-www3build:53872/")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        findHolidays(data)
-      });
     fetch("https://vm-www3build:53872/observers")
       .then(response => response.json())
       .then(data => {
@@ -93,16 +91,6 @@ function App () {
         setColumns([...cols(data)])
       });
   }, [findHolidays])
-
-
-  const onRouteChange = (route) => {
-    if (route === 'signout') {
-      setIsSignedIn(false)
-    }else if (route === 'signin') {
-      setIsSignedIn(true)
-    }
-    setRoute(route)
-  }
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
@@ -123,7 +111,7 @@ function App () {
             <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
           </div>
           <div className="grid-item">
-            <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
+            <UploadFile isAdmin={isAdmin} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
           </div>
         </div>
         <Table dat={filteredSchedule()} cols={columns} holidays={holidays} today={convertTime(new Date())}
