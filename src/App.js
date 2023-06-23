@@ -111,7 +111,7 @@ function App () {
             <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
           </div>
           <div className="grid-item">
-            <UploadFile isAdmin={isAdmin} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
+            <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
           </div>
         </div>
         <Table dat={filteredSchedule()} cols={columns} holidays={holidays} today={convertTime(new Date())}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const UploadFile = ({ onRouteChange, isAdmin, onNewSchedule }) => {
+export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
 
