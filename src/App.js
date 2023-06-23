@@ -41,7 +41,7 @@ function App () {
            Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')}
          }
         )
-      }else{
+      }else if (key!=='Holiday'){
         COLUMNS.push(
          {
            Header: key,
