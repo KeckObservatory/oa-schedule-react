@@ -16,7 +16,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   	formData.append('file', selectedFile);
 
   	fetch(
-  		'http://98.151.209.95:5000/update_schedule',
+  		'https://vm-www3build:53872/update_schedule',
   		{
   			method: 'POST',
         body: formData
