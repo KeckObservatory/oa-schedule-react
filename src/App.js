@@ -54,6 +54,20 @@ function App () {
     return COLUMNS;
   }
 
+  const convertTime = (d) => {
+    return d.getTime()-(d.getTime()%86400000) - 50400000
+  }
+
+  const findHolidays = useCallback((data)=> {
+    const hol = []
+    for (var day in data){
+      if(data[day].Holiday === 'X'){
+        hol.push(data[day].Date)
+      }
+    }
+    setHolidays([...hol])
+  }, [])
+
   useEffect(() => {
     fetch("https://vm-www3build:53872/")
       .then(response => response.json())
@@ -70,19 +84,6 @@ function App () {
       });
   }, [findHolidays])
 
-  const convertTime = (d) => {
-    return d.getTime()-(d.getTime()%86400000) - 50400000
-  }
-
-  const findHolidays = useCallback((data)=> {
-    const hol = []
-    for (var day in data){
-      if(data[day].Holiday === 'X'){
-        hol.push(data[day].Date)
-      }
-    }
-    setHolidays([...hol])
-  }, [])
 
   const onRouteChange = (route) => {
     if (route === 'signout') {
