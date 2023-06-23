@@ -48,11 +48,6 @@ table tr.holiday {
   background-color: #ed0c0c;
 }
 
-table tr.today {
-  border-width: thick;
-  border-color: black;
-}
-
 table th, tfoot td {
   padding-top: 12px;
   padding-left: 12px;
@@ -93,3 +88,9 @@ div.checkmark {
 /* div.isobuttons {
   display: inline-block;
 } */
+
+
+table tr.today {
+  border-width: thick;
+  border-color: black;
+}
