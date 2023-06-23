@@ -68,7 +68,11 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
-  }, [])
+  }, [findHolidays])
+
+  const convertTime = (d) => {
+    return d.getTime()-(d.getTime()%86400000) - 50400000
+  }
 
   const findHolidays = useCallback((data)=> {
     const hol = []
@@ -78,7 +82,7 @@ function App () {
       }
     }
     setHolidays([...hol])
-  }, [findHolidays])
+  }, [])
 
   const onRouteChange = (route) => {
     if (route === 'signout') {
