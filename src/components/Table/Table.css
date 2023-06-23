@@ -53,6 +53,8 @@ table tr.holiday {
 table tr.today {
   border-width: thick;
   border-color: black;
+  border-left: none;
+  border-right: none;
 }
 
 table th, tfoot td {
