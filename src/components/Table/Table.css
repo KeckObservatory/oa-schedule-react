@@ -14,10 +14,6 @@ table {
   width: 100%;
 }
 
-thead {
-  border: 1px solid #ddd;
-}
-
 th {
   position: sticky;
   top: 0;
