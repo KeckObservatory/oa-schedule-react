@@ -47,6 +47,10 @@ table tr.holiday {
   background-color: #fff0db;
 }
 
+table tr.pay {
+  background-color: #C6D8EB;
+}
+
 table tr.today {
   border-width: thick;
   border-color: black;

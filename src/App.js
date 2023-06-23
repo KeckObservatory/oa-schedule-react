@@ -11,6 +11,7 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
+  const [pay, setPay] = useState([])
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -40,7 +41,7 @@ function App () {
            Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')}
          }
         )
-      }else if (key!=='Holiday'){
+      }else if (key!=='Holiday' || key!=='Pay'){
         COLUMNS.push(
          {
            Header: key,
@@ -57,14 +58,18 @@ function App () {
     return d.getTime()-(d.getTime()%86400000) - 50400000
   }
 
-  const findHolidays = useCallback((data)=> {
+  const findHolidaysAndPaydays = useCallback((data)=> {
     const hol = []
+    const p = []
     for (var day in data){
       if(data[day].Holiday === 'X'){
         hol.push(data[day].Date)
+      }else if(data[day].Pay === 'X'){
+        p.push(data[day].Date)
       }
     }
     setHolidays([...hol])
+    setPay([...p])
   }, [])
 
   useEffect(() => {
@@ -82,7 +87,7 @@ function App () {
       .then(data => {
         setSchedule([...data])
         setColumns([...cols(data)])
-        findHolidays(data)
+        findHolidaysAndPaydays(data)
       });
     fetch("https://vm-www3build:53872/observers")
       .then(response => response.json())
@@ -90,12 +95,12 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
-  }, [findHolidays])
+  }, [findHolidaysAndPaydays])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
     setColumns([...cols(data)])
-    findHolidays(data)
+    findHolidaysAndPaydays(data)
   }
 
   if (schedule.length === 0) {
@@ -114,7 +119,7 @@ function App () {
             <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
           </div>
         </div>
-        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} today={convertTime(new Date())}
+        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} pay={pay} today={convertTime(new Date())}
           getCellProps={cellInfo => ({
             style: {
               backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
