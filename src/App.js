@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import DateSelector from "./components/DateSelector/DateSelector"
@@ -78,7 +78,7 @@ function App () {
       }
     }
     setHolidays([...hol])
-  }, [])
+  }, [findHolidays])
 
   const onRouteChange = (route) => {
     if (route === 'signout') {
@@ -111,7 +111,7 @@ function App () {
             <UploadFile isSignedIn={isSignedIn} onRouteChange={onRouteChange} onNewSchedule={onNewSchedule}/>
           </div>
         </div>
-        <Table dat={filteredSchedule()} cols={columns}
+        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} today={convertTime(new Date())}
           getCellProps={cellInfo => ({
             style: {
               backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
