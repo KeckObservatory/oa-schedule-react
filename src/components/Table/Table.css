@@ -50,7 +50,7 @@ table tr.holiday {
 
 table tr.today {
   border-width: thick;
-  background-color: black;
+  border-color: black;
 }
 
 table th, tfoot td {
