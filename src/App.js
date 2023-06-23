@@ -14,6 +14,7 @@ function App () {
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [route, setRoute] = useState('signin')
+  const [isAdmin, setIsAdmin] = useState(false)
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
