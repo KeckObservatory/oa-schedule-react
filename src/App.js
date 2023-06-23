@@ -69,6 +69,15 @@ function App () {
   }, [])
 
   useEffect(() => {
+    fetch('https://www3build.keck.hawaii.edu/staffinfo')
+      .then(response => response.json())
+      .then(data => {
+        if(data.Alias==="jpelletier"){
+          setIsAdmin(true)
+        }else{
+          setIsAdmin(false)
+        }
+      });
     fetch("https://vm-www3build:53872/")
       .then(response => response.json())
       .then(data => {
