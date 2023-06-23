@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
+export const UploadFile = ({ onRouteChange, isAdmin, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
 
@@ -25,7 +25,7 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
      .then(data => onNewSchedule(data));
   }
 
-  if(isSignedIn) {
+  if(isAdmin) {
   	return(
       <div className='tr'>
       	<input type="file" name="file" onChange={changeHandler} />
@@ -36,7 +36,6 @@ export const UploadFile = ({ onRouteChange, isSignedIn, onNewSchedule }) => {
   }else{
     return(
       <div className='tr'>
-        <span className=' tr f5 link dim black underline pointer'>Admin</span>
       </div>
     )
   }
