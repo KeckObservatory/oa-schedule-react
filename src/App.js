@@ -10,6 +10,7 @@ import "./App.css"
 function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
+  const [holidays, setHolidays] = useState([])
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [route, setRoute] = useState('signin')
@@ -59,6 +60,7 @@ function App () {
       .then(data => {
         setSchedule([...data])
         setColumns([...cols(data)])
+        findHolidays(data)
       });
     fetch("https://vm-www3build:53872/observers")
       .then(response => response.json())
@@ -66,6 +68,16 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
+  }, [])
+
+  const findHolidays = useCallback((data)=> {
+    const hol = []
+    for (var day in data){
+      if(data[day].Holiday === 'X'){
+        hol.push(data[day].Date)
+      }
+    }
+    setHolidays([...hol])
   }, [])
 
   const onRouteChange = (route) => {
@@ -80,6 +92,7 @@ function App () {
   const onNewSchedule = (data) => {
     setSchedule([...data])
     setColumns([...cols(data)])
+    findHolidays(data)
   }
 
   if (schedule.length === 0) {

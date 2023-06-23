@@ -5,7 +5,7 @@ import { ColumnFilter } from './ColumnFilter'
 import { format } from "date-fns"
 import { IndividualDownload } from "../IndividualDownload/IndividualDownload"
 
-export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
+export const Table = ({dat, cols, holidays, today, getCellProps, hiddenColumns=[]}) => {
 
   const columns = useMemo(() => cols, [cols])
   const data = useMemo(() => dat, [dat])
@@ -103,7 +103,11 @@ export const Table = ({dat, cols, getCellProps, hiddenColumns=[]}) => {
             {rows.map(row=> {
               prepareRow(row)
               return (
-                <tr className={row.original.DOW} {...row.getRowProps()}>
+                <tr className={holidays.includes(row.original.Date) ? "holiday " + row.original.DOW:
+                             row.original.Date === today ? "today "  + row.original.DOW:
+                             holidays.includes(row.original.Date) && row.original.Date === today ? "today holiday"  + row.original.DOW:
+                             row.original.DOW} 
+                             {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return <td {...cell.getCellProps([getCellProps(cell)])} onClick={(e) => {
                       if (cell.column.Header==="Date") {
