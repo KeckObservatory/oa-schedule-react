@@ -68,13 +68,6 @@ function App () {
   }, [])
 
   useEffect(() => {
-    fetch("https://vm-www3build:53872/")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        findHolidays(data)
-      });
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
@@ -83,6 +76,13 @@ function App () {
         }else{
           setIsAdmin(false)
         }
+      });
+    fetch("https://vm-www3build:53872/")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+        findHolidays(data)
       });
     fetch("https://vm-www3build:53872/observers")
       .then(response => response.json())
