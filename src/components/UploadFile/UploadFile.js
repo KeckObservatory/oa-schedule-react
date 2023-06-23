@@ -30,7 +30,6 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
       <div className='tr'>
       	<input type="file" name="file" onChange={changeHandler} />
       	<button onClick={handleSubmission}>Submit</button>
-        <span onClick={() => onRouteChange('signout')} className='tr f3 link dim black underline pa3 pointer'>Sign Out</span>
       </div>
   	)
   }else{
