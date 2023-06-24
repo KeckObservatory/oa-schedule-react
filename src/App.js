@@ -48,7 +48,7 @@ function App () {
             Header: key,
             Footer: key,
             accessor: key,
-            Cell: ({ value }) => { return value.split('/')}
+            Cell: ({ value }) => { return value.split('/').join(' / ')}
           }
          )
       }else if (key!=='Holiday' && key!=='Pay'){
