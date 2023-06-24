@@ -30,6 +30,7 @@ function App () {
   const cols = (schedule) => {
     const COLUMNS = [];
     const first = schedule[0];
+    const splits = ['K1 PI', 'K2 PI', 'K1 Institution', 'K2 Institution', 'K1 Instrument', 'K2 Instrument']
 
     for (var key in first) {
       if (key==='Date'){
@@ -41,6 +42,15 @@ function App () {
            Cell: ({ value }) => { return format(new Date(value), 'MM/dd/yyy')}
          }
         )
+      }else if (splits.includes(key)){
+        COLUMNS.push(
+          {
+            Header: key,
+            Footer: key,
+            accessor: key,
+            Cell: ({ value }) => { return value.split('/')}
+          }
+         )
       }else if (key!=='Holiday' && key!=='Pay'){
         COLUMNS.push(
          {
