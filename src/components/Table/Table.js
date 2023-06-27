@@ -104,6 +104,7 @@ export const Table = ({dat, cols, holidays, basepay, today, getCellProps, hidden
               prepareRow(row)
               return (
                 <tr className={holidays.includes(row.original.Date) ? "holiday " + row.original.DOW:
+                              row.original.DOW === "SUN" ? console.log(basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14)
                               (basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14 === 0 ? "pay "  + row.original.DOW:
                               // pay.includes(row.original.Date) ? "pay " + row.original.DOW:
                               row.original.Date === today ? "today "  + row.original.DOW:
