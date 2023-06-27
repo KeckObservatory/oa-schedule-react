@@ -129,7 +129,7 @@ function App () {
             <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
           </div>
         </div>
-        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} pay={pay} today={convertTime(new Date())}
+        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} basepay={convertTime(new Date("2022-01-02"))} today={convertTime(new Date())}
           getCellProps={cellInfo => ({
             style: {
               backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
