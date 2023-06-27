@@ -106,10 +106,9 @@ export const Table = ({dat, cols, holidays, basepay, today, getCellProps, hidden
                 <tr className={holidays.includes(row.original.Date) ? "holiday " + row.original.DOW:
                               //TODO figure out why I need to round
                               Math.round((basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14) === 0 ? "pay "  + row.original.DOW:
-                              // pay.includes(row.original.Date) ? "pay " + row.original.DOW:
                               row.original.Date === today ? "today "  + row.original.DOW:
                               holidays.includes(row.original.Date) && row.original.Date === today ? "today holiday"  + row.original.DOW:
-                              (basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14 === 0 && row.original.Date === today ? "today pay"  + row.original.DOW:
+                              Math.round((basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14) && row.original.Date === today ? "today pay"  + row.original.DOW:
                               row.original.DOW} 
                               {...row.getRowProps()}>
                   {row.cells.map((cell) => {

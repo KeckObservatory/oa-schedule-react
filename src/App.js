@@ -11,7 +11,6 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
-  const [pay, setPay] = useState([])
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -51,7 +50,7 @@ function App () {
             Cell: ({ value }) => { return value.split('/').join(' / ')}
           }
          )
-      }else if (key!=='Holiday' && key!=='Pay'){
+      }else if (key!=='Holiday'){
         COLUMNS.push(
          {
            Header: key,
@@ -68,18 +67,14 @@ function App () {
     return d.getTime()-(d.getTime()%86400000) - 50400000
   }
 
-  const findHolidaysAndPaydays = useCallback((data)=> {
+  const findHolidays = useCallback((data)=> {
     const hol = []
-    const p = []
     for (var day in data){
       if(data[day].Holiday === 'X'){
         hol.push(data[day].Date)
-      }else if(data[day].Pay === 'X'){
-        p.push(data[day].Date)
       }
     }
     setHolidays([...hol])
-    setPay([...p])
   }, [])
 
   useEffect(() => {
@@ -97,7 +92,7 @@ function App () {
       .then(data => {
         setSchedule([...data])
         setColumns([...cols(data)])
-        findHolidaysAndPaydays(data)
+        findHolidays(data)
       });
     fetch("https://vm-www3build:53872/observers")
       .then(response => response.json())
@@ -105,12 +100,12 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
-  }, [findHolidaysAndPaydays])
+  }, [findHolidays])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
     setColumns([...cols(data)])
-    findHolidaysAndPaydays(data)
+    findHolidays(data)
   }
 
   if (schedule.length === 0) {
