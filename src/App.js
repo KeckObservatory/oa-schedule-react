@@ -22,7 +22,10 @@ function App () {
     if(startDate !== null && endDate !== null){
       return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
     }else{
-      return (schedule);
+      const d = new Date();
+      d.setDate(d.getDate()-14);
+      // return schedule
+      return schedule.filter(sched => (sched.Date >= d));
     }
   }
 
