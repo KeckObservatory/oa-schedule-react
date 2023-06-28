@@ -20,11 +20,11 @@ function App () {
 
   const filteredSchedule = () => {
     if(startDate !== null && endDate !== null){
+
       return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
     }else{
       const d = new Date();
       d.setDate(d.getDate()-14);
-      // return schedule
       return schedule.filter(sched => (sched.Date >= d));
     }
   }
@@ -80,16 +80,24 @@ function App () {
     setHolidays([...hol])
   }, [])
 
-  useEffect(() => {
-    fetch('https://www3build.keck.hawaii.edu/staffinfo')
+  const getSchedule = () => {
+    const d = new Date();
+    fetch("https://vm-www3build:53872/last_day")
       .then(response => response.json())
       .then(data => {
-        if(data.Alias==="jpelletier"){
-          setIsAdmin(true)
-        }else{
-          setIsAdmin(false)
-        }
+        setDateRange(d.setDate(d.getDate()-14), data)
+        console.log(dateRange)
       });
+    // fetch("https://vm-www3build:53872/nightstaff", {
+    //   method: 'post',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({'Start': start, 'End': end })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+      // });
     fetch("https://vm-www3build:53872/")
       .then(response => response.json())
       .then(data => {
@@ -103,6 +111,42 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
+  }
+
+  useEffect(() => {
+    fetch('https://www3build.keck.hawaii.edu/staffinfo')
+      .then(response => response.json())
+      .then(data => {
+        if(data.Alias==="jpelletier"){
+          setIsAdmin(true)
+        }else{
+          setIsAdmin(false)
+        }
+      });
+      getSchedule()
+    // fetch("https://vm-www3build:53872/nightstaff", {
+    //   method: 'post',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({'Start': start, 'End': end })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //   });
+    // fetch("https://vm-www3build:53872/")
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //     findHolidays(data)
+    //   });
+    // fetch("https://vm-www3build:53872/observers")
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //   });
   }, [findHolidays])
 
   const onNewSchedule = (data) => {
