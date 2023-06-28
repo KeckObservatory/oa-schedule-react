@@ -157,7 +157,8 @@ function App () {
     //     setSchedule([...data])
     //     setColumns([...cols(data)])
     //   });
-  }, [getSchedule])
+    console.log(schedule)
+  }, [getSchedule, schedule])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
