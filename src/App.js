@@ -87,7 +87,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         setDateRange([startDate, data])
-        console.log(endDate)
+        console.log(startDate)
       });
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
