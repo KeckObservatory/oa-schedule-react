@@ -14,7 +14,7 @@ function App () {
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date().setDate(d.getDate()-14), null]);
   const [startDate, endDate] = dateRange;
 
 
@@ -81,11 +81,10 @@ function App () {
   }, [])
 
   const getSchedule = useCallback(() => {
-    const d = new Date();
     fetch("https://vm-www3build:53872/last_day")
       .then(response => response.json())
       .then(data => {
-        setDateRange([d.setDate(d.getDate()-14), data])
+        setDateRange([startDate, data])
         console.log(dateRange)
       });
     // fetch("https://vm-www3build:53872/nightstaff", {
@@ -114,7 +113,6 @@ function App () {
   }, [dateRange, findHolidays])
 
   useEffect(() => {
-    const d = new Date();
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
@@ -124,13 +122,7 @@ function App () {
           setIsAdmin(false)
         }
       });
-      // getSchedule()
-    fetch("https://vm-www3build:53872/last_day")
-      .then(response => response.json())
-      .then(data => {
-        setDateRange([d.setDate(d.getDate()-14), data])
-        console.log(dateRange)
-      });
+      getSchedule()
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
     //   headers: { 'Content-Type': 'application/json' },
@@ -141,20 +133,20 @@ function App () {
     //     setSchedule([...data])
     //     setColumns([...cols(data)])
     //   });
-    fetch("https://vm-www3build:53872/")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        findHolidays(data)
-      });
-    fetch("https://vm-www3build:53872/observers")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-      });
-  }, [getSchedule, dateRange, findHolidays])
+    // fetch("https://vm-www3build:53872/")
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //     findHolidays(data)
+    //   });
+    // fetch("https://vm-www3build:53872/observers")
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //   });
+  }, [getSchedule])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
