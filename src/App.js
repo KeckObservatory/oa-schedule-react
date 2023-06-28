@@ -88,7 +88,6 @@ function App () {
         setDateRange(d.setDate(d.getDate()-14), data)
         console.log(dateRange)
       })
-  }, [])
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
     //   headers: { 'Content-Type': 'application/json' },
@@ -112,7 +111,7 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
-  }
+  }, [])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
