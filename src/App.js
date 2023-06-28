@@ -13,7 +13,7 @@ function App () {
   const [holidays, setHolidays] = useState([])
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
-  const [lastDay, setLastDay] = useState()
+  const [lastDay, setLastDay] = useState(null)
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -84,11 +84,13 @@ function App () {
   }, [])
 
   const getSchedule = useCallback(() => {
-    fetch("https://vm-www3build:53872/last_day")
-      .then(response => response.json())
-      .then(data => {
-        setLastDay(data)
-      });
+    if (lastDay === null) {
+      fetch("https://vm-www3build:53872/last_day")
+        .then(response => response.json())
+        .then(data => {
+          setLastDay(data)
+        });
+    }
     fetch("https://vm-www3build:53872/nightstaff", {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
