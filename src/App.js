@@ -14,7 +14,7 @@ function App () {
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
-  const [dateRange, setDateRange] = useState([new Date().setDate(d.getDate()-14), null]);
+  const [dateRange, setDateRange] = useState([new Date().setDate(new Date().getDate()-14), null]);
   const [startDate, endDate] = dateRange;
 
 
