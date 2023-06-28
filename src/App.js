@@ -86,9 +86,7 @@ function App () {
     fetch("https://vm-www3build:53872/last_day")
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        setLastDay(data)
-        console.log(lastDay)
+        endDate = data
       });
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
