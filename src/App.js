@@ -157,7 +157,6 @@ function App () {
     //     setSchedule([...data])
     //     setColumns([...cols(data)])
     //   });
-    console.log(schedule)
   }, [getSchedule, schedule])
 
   const onNewSchedule = (data) => {
@@ -168,38 +167,40 @@ function App () {
 
   if (schedule.length === 0) {
         return <div />
-      }
-
-
-  return (
-    <div>
-      <ErrorBoundry>
-        <div className="grid-container">
-          <div className="grid-item">
-            <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+  }else{
+    return (
+      <div>
+        <ErrorBoundry>
+          <div className="grid-container">
+            <div className="grid-item">
+              <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+            </div>
+            <div className="grid-item">
+              <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
+            </div>
           </div>
-          <div className="grid-item">
-            <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
-          </div>
-        </div>
-        <Table dat={filteredSchedule()} cols={columns} holidays={holidays} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
-          getCellProps={cellInfo => ({
-            style: {
-              backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
-                               ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "#7272FD" :
-                               ["X", "L"].includes(cellInfo.value) ? "#D680D6" :
-                               cellInfo.value === "OM" ? "#FFFF64" :
-                               cellInfo.value === "HQ" ? "#2EB22E" :
-                               cellInfo.value === "H" ? "#00D897" :
-                               // cellInfo.value === null ? "#FFFFFF":
-                               // (cellInfo.value.toString().startsWith('O') && cellInfo.value.length < 4) ? "#FFFFFF":
-                               null
+          <Table dat={filteredSchedule()} cols={columns} holidays={holidays} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
+            getCellProps={cellInfo => ({
+              style: {
+                backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
+                                 ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "#7272FD" :
+                                 ["X", "L"].includes(cellInfo.value) ? "#D680D6" :
+                                 cellInfo.value === "OM" ? "#FFFF64" :
+                                 cellInfo.value === "HQ" ? "#2EB22E" :
+                                 cellInfo.value === "H" ? "#00D897" :
+                                 // cellInfo.value === null ? "#FFFFFF":
+                                 // (cellInfo.value.toString().startsWith('O') && cellInfo.value.length < 4) ? "#FFFFFF":
+                                 null
+  
+              },
+            })}/>
+        </ErrorBoundry>
+      </div>
+    );
+  }
 
-            },
-          })}/>
-      </ErrorBoundry>
-    </div>
-  );
+
+  
 
 }
 
