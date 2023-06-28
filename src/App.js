@@ -12,7 +12,7 @@ function App () {
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
   //TODO figure out how to integrate this into dateRange without contant reloads
-  const [firstDay, setFirstDay] = useState(new Date().setDate(d.getDate()-14))
+  const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
   const [lastDay, setLastDay] = useState()
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
