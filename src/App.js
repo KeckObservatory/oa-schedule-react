@@ -123,7 +123,13 @@ function App () {
           setIsAdmin(false)
         }
       });
-      getSchedule()
+      // getSchedule()
+    fetch("https://vm-www3build:53872/last_day")
+      .then(response => response.json())
+      .then(data => {
+        setDateRange([d.setDate(d.getDate()-14), data])
+        console.log(dateRange)
+      });
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
     //   headers: { 'Content-Type': 'application/json' },
@@ -134,20 +140,20 @@ function App () {
     //     setSchedule([...data])
     //     setColumns([...cols(data)])
     //   });
-    // fetch("https://vm-www3build:53872/")
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //     findHolidays(data)
-    //   });
-    // fetch("https://vm-www3build:53872/observers")
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //   });
-  }, [getSchedule])
+    fetch("https://vm-www3build:53872/")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+        findHolidays(data)
+      });
+    fetch("https://vm-www3build:53872/observers")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+      });
+  }, [getSchedule, dateRange, findHolidays])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
