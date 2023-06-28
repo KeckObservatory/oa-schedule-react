@@ -169,8 +169,8 @@ function App () {
         return <div />
   }else{
     return (
-      {console.log(schedule.length)}
       <div>
+        {console.log(schedule.length)}
         <ErrorBoundry>
           <div className="grid-container">
             <div className="grid-item">
