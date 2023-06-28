@@ -114,6 +114,7 @@ function App () {
   }, [dateRange, findHolidays])
 
   useEffect(() => {
+    const d = new Date();
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
