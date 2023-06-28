@@ -147,7 +147,7 @@ function App () {
     //     setSchedule([...data])
     //     setColumns([...cols(data)])
     //   });
-  }, [findHolidays])
+  }, [getSchedule])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
