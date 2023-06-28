@@ -80,14 +80,15 @@ function App () {
     setHolidays([...hol])
   }, [])
 
-  const getSchedule = () => {
+  const getSchedule = useCallback(() => {
     const d = new Date();
     fetch("https://vm-www3build:53872/last_day")
       .then(response => response.json())
       .then(data => {
         setDateRange(d.setDate(d.getDate()-14), data)
         console.log(dateRange)
-      });
+      })
+  }, [])
     // fetch("https://vm-www3build:53872/nightstaff", {
     //   method: 'post',
     //   headers: { 'Content-Type': 'application/json' },
