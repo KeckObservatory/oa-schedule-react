@@ -90,34 +90,35 @@ function App () {
         .then(data => {
           setLastDay(data)
         });
-    }
-    fetch("https://vm-www3build:53872/nightstaff", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({'Start': firstDay, 'End': lastDay })
-    })
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-      });
-    fetch("https://vm-www3build:53872/")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        findHolidays(data)
-      });
-    fetch("https://vm-www3build:53872/observers", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({'Start': firstDay, 'End': lastDay })
-    })
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-      });
+    }else{
+      fetch("https://vm-www3build:53872/nightstaff", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'Start': firstDay, 'End': lastDay })
+      })
+        .then(response => response.json())
+        .then(data => {
+          setSchedule([...data])
+          setColumns([...cols(data)])
+        });
+      fetch("https://vm-www3build:53872/")
+        .then(response => response.json())
+        .then(data => {
+          setSchedule([...data])
+          setColumns([...cols(data)])
+          findHolidays(data)
+        });
+      fetch("https://vm-www3build:53872/observers", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'Start': firstDay, 'End': lastDay })
+      })
+        .then(response => response.json())
+        .then(data => {
+          setSchedule([...data])
+          setColumns([...cols(data)])
+        });
+      }
   }, [firstDay, lastDay, findHolidays])
 
   useEffect(() => {
