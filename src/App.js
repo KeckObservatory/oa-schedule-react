@@ -169,6 +169,7 @@ function App () {
         return <div />
   }else{
     return (
+      {console.log(schedule.length)}
       <div>
         <ErrorBoundry>
           <div className="grid-container">
