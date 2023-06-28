@@ -111,7 +111,7 @@ function App () {
         setSchedule([...data])
         setColumns([...cols(data)])
       });
-  }, [])
+  }, [dateRange, findHolidays])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
