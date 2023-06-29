@@ -14,7 +14,7 @@ function App () {
   const [newfile, setNewFile] = useState([])
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
-  const [lastDay, setLastDay] = useState(null)
+  const [lastDay, setLastDay] = useState(new Date().setDate(new Date().getDate()+60))
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -24,7 +24,19 @@ function App () {
 
   const filteredSchedule = () => {
     if(startDate !== null && endDate !== null){
-
+        if (startDate < firstDay){
+          fetch("https://vm-www3build:53872/nightstaff", {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'Start': startDate, 'End': firstDay })
+        })
+          .then(response => response.json())
+          .then(data => {
+            newsched = schedule.concat(data)
+            setSchedule([...newsched])
+            setColumns([...cols(newsched)])
+          });
+        }
       return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
     }else{
       const d = new Date();
@@ -86,15 +98,12 @@ function App () {
 
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
-  // TODO FIGURE OUT WHY THIS BROKE
   const getSchedule = useCallback(() => {
     if (lastDay === null) {
       fetch("https://vm-www3build:53872/last_day")
         .then(response => response.json())
         .then(data => {
           if (data === null){
-            //TODO iron out this auto date setting
-            setLastDay(new Date().setDate(new Date().getDate()+60))
             setNewFile(true)
           }else{
             setNewFile(false)
@@ -120,6 +129,7 @@ function App () {
           setSchedule([...data])
           setColumns([...cols(data)])
           findHolidays(data)
+          setFirstDay(data[0].Date)
         });
       } 
       fetch("https://vm-www3build:53872/observers", {
