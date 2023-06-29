@@ -11,7 +11,7 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
-  const [newfile, setNewFile] = useState(false)
+  const [newfile, setNewFile] = useState([])
   const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
