@@ -32,7 +32,7 @@ function App () {
         })
           .then(response => response.json())
           .then(data => {
-            newsched = schedule.concat(data)
+            const newsched = schedule.concat(data)
             setSchedule([...newsched])
             setColumns([...cols(newsched)])
           });
