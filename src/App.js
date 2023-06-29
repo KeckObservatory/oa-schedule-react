@@ -143,7 +143,7 @@ function App () {
           setColumns([...cols(data)])
         });
       }
-  }, [firstDay, lastDay, findHolidays])
+  }, [firstDay, lastDay, findHolidays, newfile])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
