@@ -85,6 +85,7 @@ function App () {
 
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
+  // TODO FIGURE OUT WHY THIS BROKE
   const getSchedule = useCallback(() => {
     if (lastDay === null) {
       fetch("https://vm-www3build:53872/last_day")
