@@ -35,6 +35,7 @@ function App () {
             const newsched = schedule.concat(data)
             setSchedule([...newsched])
             setColumns([...cols(newsched)])
+            console.log(schedule)
           });
         }
       return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
