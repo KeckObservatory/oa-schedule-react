@@ -148,7 +148,7 @@ function App () {
         });
       }
     }
-  }, [firstDay, lastDay, findHolidays, newfile])
+  }, [firstDay, lastDay, findHolidays, newfile, obsReady])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
