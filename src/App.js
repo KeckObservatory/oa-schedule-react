@@ -91,7 +91,12 @@ function App () {
       fetch("https://vm-www3build:53872/last_day")
         .then(response => response.json())
         .then(data => {
-          setLastDay(data)
+          if (data === null){
+            //TODO iron out this auto date setting
+            setLastDay(new Date().setDate(new Date().getDate()+60))
+          }else{
+            setLastDay(data)
+          }
         });
     }else{
       fetch("https://vm-www3build:53872/")
