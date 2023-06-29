@@ -11,7 +11,8 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
-  const [newfile, setNewFile] = useState([])
+  const [newfile, setNewFile] = useState(false)
+  const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
   const [lastDay, setLastDay] = useState(new Date().setDate(new Date().getDate()+60))
@@ -131,9 +132,11 @@ function App () {
           setColumns([...cols(data)])
           findHolidays(data)
           setFirstDay(data[0].Date)
+          setObsReady(true)
         });
-      } 
-      fetch("https://vm-www3build:53872/observers", {
+      }
+      if(obsReady===true) {
+        fetch("https://vm-www3build:53872/observers", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Start': firstDay, 'End': lastDay })
@@ -144,6 +147,7 @@ function App () {
           setColumns([...cols(data)])
         });
       }
+    }
   }, [firstDay, lastDay, findHolidays, newfile])
 
   useEffect(() => {
