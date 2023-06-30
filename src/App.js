@@ -29,7 +29,8 @@ function App () {
           fetch("https://vm-www3build:53872/nightstaff", {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'Start': startDate, 'End': firstDay })
+            //TODO switch enddate to first day
+            body: JSON.stringify({'Start': startDate, 'End': endDate })
         })
           .then(response => response.json())
           .then(data => {
