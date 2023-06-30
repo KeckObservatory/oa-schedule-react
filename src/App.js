@@ -42,7 +42,7 @@ function App () {
             })
               .then(response => response.json())
               .then(data => {
-                setSchedule([...newsched])
+                setSchedule([...data])
                 setDateRange(range)
            });
       });
