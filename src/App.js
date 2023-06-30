@@ -36,10 +36,12 @@ function App () {
         console.log(schedule)
         console.log(newsched)
         setSchedule([...newsched])
+        setDateRange(range)
         // setColumns([...cols(newsched)])
       });
-    }
-    setDateRange(range)
+    }else{
+      setDateRange(range)
+    }   
   }
 
   const filteredSchedule = () => {
