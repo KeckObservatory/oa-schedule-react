@@ -153,6 +153,7 @@ function App () {
         .then(data => {
           setSchedule([...data])
           setColumns([...cols(data)])
+          setObsReady(false)
         });
       }
     }
