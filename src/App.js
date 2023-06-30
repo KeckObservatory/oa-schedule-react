@@ -24,7 +24,7 @@ function App () {
 
 
   const filterRange = (range) => {
-    console.log(range)
+    console.log(typeof range)
     setDateRange(range)
     // if (startDate < firstDay){
     //   fetch("https://vm-www3build:53872/nightstaff", {
