@@ -33,6 +33,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         // const newsched = data.concat(schedule)
+        console.log([schedule => [...data, ...schedule]])
         setSchedule([schedule => [...data, ...schedule]])
         // setSchedule([...data])
         setDateRange(range)
