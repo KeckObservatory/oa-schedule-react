@@ -159,7 +159,7 @@ function App () {
         setObsReady(false)
       });
     }
-  }, [firstDay, findHolidays, obsReady, schedule])
+  }, [firstDay, isLastDayNull, findHolidays, obsReady, schedule])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
