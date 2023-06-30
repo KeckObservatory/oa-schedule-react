@@ -110,6 +110,10 @@ function App () {
     return true
   }, [lastDay])
 
+  const getScheduleJson = useCallback(() => {
+    return schedule
+  }, [schedule])
+
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
   const getSchedule = useCallback(() => {
@@ -150,7 +154,7 @@ function App () {
       fetch("https://vm-www3build:53872/observers", {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({'Schedule': schedule, 'Start': firstDay, 'End': end })
+      body: JSON.stringify({'Schedule': getScheduleJson(), 'Start': firstDay, 'End': end })
     })
       .then(response => response.json())
       .then(data => {
@@ -159,7 +163,7 @@ function App () {
         setObsReady(false)
       });
     }
-  }, [firstDay, isLastDayNull, findHolidays, obsReady, schedule])
+  }, [firstDay, isLastDayNull, findHolidays, obsReady, getScheduleJson])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
