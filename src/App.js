@@ -106,17 +106,14 @@ function App () {
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
   const getSchedule = useCallback(() => {
-    let end;
+    let end = new Date().setDate(new Date().getDate()+60)
     if (lastDay === null) {
       fetch("https://vm-www3build:53872/last_day")
         .then(response => response.json())
         .then(data => {
-          if (data === null){
-            end = new Date().setDate(new Date().getDate()+60)
-          }else{
+          if (data !== null){
             end = data
           }
-          console.log(firstDay, end)
         }).then(
           fetch("https://vm-www3build:53872/nightstaff", {
             method: 'post',
