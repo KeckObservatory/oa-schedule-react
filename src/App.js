@@ -24,22 +24,22 @@ function App () {
 
 
   const filterRange = (range) => {
-    console.log(new Date(range[0]).getTime())
+    console.log(new Date(range[0]).getTime() < firstDay)
+    if (new Date(range[0]).getTime() < firstDay && range[0] !== null){
+      fetch("https://vm-www3build:53872/nightstaff", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        //TODO switch enddate to first day
+        body: JSON.stringify({'Start': startDate, 'End': endDate })
+    })
+      .then(response => response.json())
+      .then(data => {
+        // const newsched = schedule.concat(data)
+        setSchedule([...data])
+        setColumns([...cols(data)])
+      });
+    }
     setDateRange(range)
-    // if (startDate < firstDay){
-    //   fetch("https://vm-www3build:53872/nightstaff", {
-    //     method: 'post',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     //TODO switch enddate to first day
-    //     body: JSON.stringify({'Start': startDate, 'End': endDate })
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     // const newsched = schedule.concat(data)
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //   });
-    // }
   }
 
   const filteredSchedule = () => {
@@ -138,7 +138,6 @@ function App () {
           setColumns([...cols(data)])
           findHolidays(data)
           setFirstDay(data[0].Date)
-          console.log(firstDay)
           setObsReady(true)
         });
       }
