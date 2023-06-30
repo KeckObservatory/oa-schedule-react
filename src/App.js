@@ -24,13 +24,12 @@ function App () {
 
 
   const filterRange = (range) => {
-    console.log(new Date(range[0]).getTime() < firstDay)
     if (new Date(range[0]).getTime() < firstDay && range[1] !== null){
       fetch("https://vm-www3build:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         //TODO switch enddate to first day
-        body: JSON.stringify({'Start': startDate, 'End': endDate })
+        body: JSON.stringify({'Start': Date(range[0]).getTime(), 'End': Date(range[1]).getTime() })
     })
       .then(response => response.json())
       .then(data => {
