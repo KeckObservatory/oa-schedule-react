@@ -2,7 +2,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DateSelector.css"
 
-const DateSelector = ({ dateRange, setDateRange }) => {
+const DateSelector = ({ dateRange, filterRange }) => {
   const [startDate, endDate] = dateRange;
   return(
     <div>
@@ -13,7 +13,7 @@ const DateSelector = ({ dateRange, setDateRange }) => {
         selectsRange={true}
         startDate={startDate}
         endDate={endDate}
-        onChange={(update) => {setDateRange(update);}} isClearable={true}
+        onChange={(update) => {filterRange(update);}} isClearable={true}
         monthsShown={2}
       />
     </div>

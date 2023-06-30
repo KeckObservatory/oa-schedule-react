@@ -207,7 +207,7 @@ function App () {
         <ErrorBoundry>
           <div className="grid-container">
             <div className="grid-item">
-              <DateSelector dateRange={dateRange} setDateRange={setDateRange}/>
+              <DateSelector dateRange={dateRange} filterRange={filterRange}/>
             </div>
             <div className="grid-item">
               <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
