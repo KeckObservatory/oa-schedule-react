@@ -201,7 +201,7 @@ function App () {
     findHolidays(data)
   }
 
-  if (schedule.length === 0) {
+  if (schedule[0].Date === undefined) {
         return <div />
   }else{
     return (
