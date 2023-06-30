@@ -23,7 +23,6 @@ function App () {
 
 
   const filterRange = (range) => {
-    console.log(range)
     if (new Date(range[0]).getTime() < firstDay && range[1] !== null){
       fetch("https://vm-www3build:53872/nightstaff", {
         method: 'post',
