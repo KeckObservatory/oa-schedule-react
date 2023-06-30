@@ -32,10 +32,12 @@ function App () {
     })
       .then(response => response.json())
       .then(data => {
+        console.log(schedule)
         // const newsched = data.concat(schedule)
         // setSchedule([...newsched])
         setSchedule([...data])
         setDateRange(range)
+        console.log(schedule)
         // setColumns([...cols(newsched)])
       });
     }else{
