@@ -32,14 +32,13 @@ function App () {
     })
       .then(response => response.json())
       .then(data => {
-        const end = new Date(range[1])
         const newsched = data.concat(schedule)
         // setSchedule([...data])
         // setColumns([...cols(newsched)])
         fetch("https://vm-www3build:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': end.setDate(end.getDate() + 1).getTime() })
+              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
             })
               .then(response => response.json())
               .then(data => {
