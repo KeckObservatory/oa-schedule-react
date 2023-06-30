@@ -34,9 +34,9 @@ function App () {
         })
           .then(response => response.json())
           .then(data => {
-            const newsched = schedule.concat(data)
-            setSchedule([...newsched])
-            setColumns([...cols(newsched)])
+            // const newsched = schedule.concat(data)
+            setSchedule([...data])
+            setColumns([...cols(data)])
             console.log(schedule)
           });
         }
