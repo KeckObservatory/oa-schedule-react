@@ -33,10 +33,18 @@ function App () {
       .then(response => response.json())
       .then(data => {
         const newsched = data.concat(schedule)
-        setSchedule([...newsched])
         // setSchedule([...data])
-        setDateRange(range)
         // setColumns([...cols(newsched)])
+        fetch("https://vm-www3build:53872/observers", {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
+            })
+              .then(response => response.json())
+              .then(data => {
+                setSchedule([...newsched])
+                setDateRange(range)
+           });
       });
     }else{
       setDateRange(range)
