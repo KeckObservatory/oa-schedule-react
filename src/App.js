@@ -119,8 +119,6 @@ function App () {
             setLastDay(data)
           }
         });
-    }else{
-      if(newfile===true){
         fetch("https://vm-www3build:53872/nightstaff", {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
@@ -131,32 +129,30 @@ function App () {
           setSchedule([...data])
           setColumns([...cols(data)])
           setObsReady(true)
-          setNewFile(false)
         });
-      }else{
-        fetch("https://vm-www3build:53872/")
-        .then(response => response.json())
-        .then(data => {
-          setSchedule([...data])
-          setColumns([...cols(data)])
-          findHolidays(data)
-          setFirstDay(data[0].Date)
-          setObsReady(true)
-        });
-      }
-      if(obsReady===true) {
-        fetch("https://vm-www3build:53872/observers", {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({'Schedule': schedule, 'Start': firstDay, 'End': lastDay })
-      })
-        .then(response => response.json())
-        .then(data => {
-          setSchedule([...data])
-          setColumns([...cols(data)])
-          setObsReady(false)
-        });
-      }
+    }else{
+      fetch("https://vm-www3build:53872/")
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+        findHolidays(data)
+        setFirstDay(data[0].Date)
+        setObsReady(true)
+      });
+    }
+    if(obsReady===true) {
+      fetch("https://vm-www3build:53872/observers", {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({'Schedule': schedule, 'Start': firstDay, 'End': lastDay })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setSchedule([...data])
+        setColumns([...cols(data)])
+        setObsReady(false)
+      });
     }
   }, [firstDay, lastDay, findHolidays, newfile, obsReady, schedule])
 
