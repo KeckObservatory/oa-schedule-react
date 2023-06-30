@@ -15,7 +15,7 @@ function App () {
   const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
-  const [lastDay, setLastDay] = useState(new Date().setDate(new Date().getDate()+60))
+  const [lastDay, setLastDay] = useState()
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -109,6 +109,7 @@ function App () {
           console.log(data)
           if (data === null){
             setNewFile(true)
+            setLastDay(new Date().setDate(new Date().getDate()+60))
           }else{
             setNewFile(false)
             setLastDay(data)
