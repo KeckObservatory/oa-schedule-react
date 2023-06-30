@@ -33,9 +33,9 @@ function App () {
     })
       .then(response => response.json())
       .then(data => {
-        // const newsched = schedule.concat(data)
-        setSchedule([...data])
-        setColumns([...cols(data)])
+        const newsched = schedule.concat(data)
+        setSchedule([...newsched])
+        setColumns([...cols(newsched)])
       });
     }
     setDateRange(range)
