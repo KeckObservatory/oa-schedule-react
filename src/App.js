@@ -11,7 +11,7 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
-  const [obsReady, setObsReady] = useState(false)
+  // const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
   // const [lastDay, setLastDay] = useState(null)
@@ -136,10 +136,9 @@ function App () {
               .then(data => {
                 setSchedule([...data])
                 setColumns([...cols(data)])
-                setObsReady(false)
               });
           });
-    }, [firstDay, findHolidays])
+    }, [firstDay])
 
   const getSchedule = useCallback(() => {
     fetch("https://vm-www3build:53872/")
@@ -152,7 +151,7 @@ function App () {
       fetch("https://vm-www3build:53872/observers", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': data[-1].Date })
+        body: JSON.stringify({'Schedule': data, 'Start': data[0].Date, 'End': data[-1].Date })
       })
         .then(response => response.json())
         .then(data => {
