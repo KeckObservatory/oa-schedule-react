@@ -181,18 +181,18 @@ function App () {
             getSchedule()
           }
         })   
-      fetch("https://vm-www3build:53872/last_day")
-        .then(response => response.json())
-        .then(data => {
-          if (data !== null){
-            setLastDay(data)
-          }
-          if (isLastDayNull() === true){
-            getInitialSchedule()
-          }else{
-            getSchedule()
-          }
-        })   
+      // fetch("https://vm-www3build:53872/last_day")
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     if (data !== null){
+      //       setLastDay(data)
+      //     }
+      //     if (isLastDayNull() === true){
+      //       getInitialSchedule()
+      //     }else{
+      //       getSchedule()
+      //     }
+      //   })   
   }, [getInitialSchedule, getSchedule])
 
   const onNewSchedule = (data) => {
