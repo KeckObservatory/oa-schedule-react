@@ -11,7 +11,6 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
-  const [newfile, setNewFile] = useState([])
   const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
@@ -112,10 +111,8 @@ function App () {
         .then(response => response.json())
         .then(data => {
           if (data === null){
-            setNewFile(true)
             setLastDay(new Date().setDate(new Date().getDate()+60))
           }else{
-            setNewFile(false)
             setLastDay(data)
           }
         });
@@ -154,7 +151,7 @@ function App () {
         setObsReady(false)
       });
     }
-  }, [firstDay, lastDay, findHolidays, newfile, obsReady, schedule])
+  }, [firstDay, lastDay, findHolidays, obsReady, schedule])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
