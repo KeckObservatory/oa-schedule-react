@@ -29,7 +29,7 @@ function App () {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         //TODO switch enddate to first day
-        body: JSON.stringify({'Start': Date(range[0]).getTime(), 'End': Date(range[1]).getTime() })
+        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
     })
       .then(response => response.json())
       .then(data => {
