@@ -131,6 +131,7 @@ function App () {
           setSchedule([...data])
           setColumns([...cols(data)])
           setObsReady(true)
+          setNewFile(false)
         });
       }else{
         fetch("https://vm-www3build:53872/")
