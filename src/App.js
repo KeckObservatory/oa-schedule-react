@@ -103,11 +103,18 @@ function App () {
     setHolidays([...hol])
   }, [])
 
+  const isLastDayNull = useCallback(() => {
+    if (lastDay !== null){
+      return false
+    }
+    return true
+  }, [lastDay])
+
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
   const getSchedule = useCallback(() => {
     let end = new Date().setDate(new Date().getDate()+60)
-    if (lastDay === null) {
+    if (isLastDayNull() === true) {
       fetch("https://vm-www3build:53872/last_day")
         .then(response => response.json())
         .then(data => {
@@ -143,7 +150,7 @@ function App () {
       fetch("https://vm-www3build:53872/observers", {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({'Schedule': schedule, 'Start': firstDay, 'End': lastDay })
+      body: JSON.stringify({'Schedule': schedule, 'Start': firstDay, 'End': end })
     })
       .then(response => response.json())
       .then(data => {
@@ -152,7 +159,7 @@ function App () {
         setObsReady(false)
       });
     }
-  }, [firstDay, lastDay, findHolidays, obsReady, schedule])
+  }, [firstDay, findHolidays, obsReady, schedule])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
