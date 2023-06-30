@@ -39,7 +39,7 @@ function App () {
         fetch("https://vm-www3build:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': end.setDate(end.getDate() + 1)) })
+              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': end.setDate(end.getDate() + 1) })
             })
               .then(response => response.json())
               .then(data => {
