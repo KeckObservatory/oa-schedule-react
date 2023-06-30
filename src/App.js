@@ -215,6 +215,7 @@ function App () {
               <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
             </div>
           </div>
+          {console.log(schedule)}
           <Table dat={filteredSchedule()} cols={columns} holidays={holidays} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
             getCellProps={cellInfo => ({
               style: {
