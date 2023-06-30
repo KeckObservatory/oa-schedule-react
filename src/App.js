@@ -174,10 +174,10 @@ function App () {
       fetch("https://vm-www3build:53872/file_check")
         .then(response => response.json())
         .then(data => {
-          if (data==="False"){
-            getInitialSchedule()
-          }else{
+          if (data.File){
             getSchedule()
+          }else{
+            getInitialSchedule()
           }
         })   
       // fetch("https://vm-www3build:53872/last_day")
