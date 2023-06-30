@@ -47,6 +47,9 @@ function App () {
                 setDateRange(range)
            });
       });
+    }else if(startDate !== null && endDate !== null){
+      getSchedule()
+      setDateRange(range)
     }else{
       setDateRange(range)
     }   
