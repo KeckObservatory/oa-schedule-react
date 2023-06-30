@@ -23,22 +23,27 @@ function App () {
   const [startDate, endDate] = dateRange;
 
 
+  const filterRange = (range) => {
+    console.log(range)
+    setDateRange(range)
+    // if (startDate < firstDay){
+    //   fetch("https://vm-www3build:53872/nightstaff", {
+    //     method: 'post',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     //TODO switch enddate to first day
+    //     body: JSON.stringify({'Start': startDate, 'End': endDate })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     // const newsched = schedule.concat(data)
+    //     setSchedule([...data])
+    //     setColumns([...cols(data)])
+    //   });
+    // }
+  }
+
   const filteredSchedule = () => {
     if(startDate !== null && endDate !== null){
-        if (startDate < firstDay){
-          fetch("https://vm-www3build:53872/nightstaff", {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            //TODO switch enddate to first day
-            body: JSON.stringify({'Start': startDate, 'End': endDate })
-        })
-          .then(response => response.json())
-          .then(data => {
-            // const newsched = schedule.concat(data)
-            setSchedule([...data])
-            setColumns([...cols(data)])
-          });
-        }
       return schedule.filter(sched => (sched.Date <= endDate && sched.Date >= startDate));
     }else{
       const d = new Date();
