@@ -14,7 +14,7 @@ function App () {
   const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
-  const [lastDay, setLastDay] = useState(null)
+  // const [lastDay, setLastDay] = useState(null)
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -103,30 +103,22 @@ function App () {
     setHolidays([...hol])
   }, [])
 
-  const isLastDayNull = useCallback(() => {
-    if (lastDay !== null){
-      return false
-    }
-    return true
-  }, [lastDay])
+  // const isLastDayNull = useCallback(() => {
+  //   if (lastDay !== null){
+  //     return false
+  //   }
+  //   return true
+  // }, [lastDay])
 
-  const getScheduleJson = useCallback(() => {
-    return schedule
-  }, [schedule])
+  // const getScheduleJson = useCallback(() => {
+  //   return schedule
+  // }, [schedule])
 
   // TODO merge nighstaff and excel reads into something good
   // TODO make date ranges work with fetches
-  const getSchedule = useCallback(() => {
+  const getInitialSchedule = useCallback(() => {
     let end = new Date().setDate(new Date().getDate()+60)
-    if (isLastDayNull() === true) {
-      fetch("https://vm-www3build:53872/last_day")
-        .then(response => response.json())
-        .then(data => {
-          if (data !== null){
-            end = data
-          }
-        }).then(
-          fetch("https://vm-www3build:53872/nightstaff", {
+    fetch("https://vm-www3build:53872/nightstaff", {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'Start': firstDay, 'End': end })
@@ -135,35 +127,40 @@ function App () {
           .then(data => {
             setSchedule([...data])
             setColumns([...cols(data)])
-            setObsReady(true)
-            setLastDay(end)
-          })
-        );
-    }else{
-      fetch("https://vm-www3build:53872/")
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        findHolidays(data)
-        setFirstDay(data[0].Date)
-        setObsReady(true)
-      });
-    }
-    if(obsReady===true) {
+            fetch("https://vm-www3build:53872/observers", {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
+            })
+              .then(response => response.json())
+              .then(data => {
+                setSchedule([...data])
+                setColumns([...cols(data)])
+                setObsReady(false)
+              });
+          });
+    }, [firstDay, findHolidays])
+
+  const getSchedule = useCallback(() => {
+    fetch("https://vm-www3build:53872/")
+    .then(response => response.json())
+    .then(data => {
+      setSchedule([...data])
+      setColumns([...cols(data)])
+      findHolidays(data)
+      setFirstDay(data[0].Date)
       fetch("https://vm-www3build:53872/observers", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({'Schedule': getScheduleJson(), 'Start': firstDay, 'End': end })
-    })
-      .then(response => response.json())
-      .then(data => {
-        setSchedule([...data])
-        setColumns([...cols(data)])
-        setObsReady(false)
-      });
-    }
-  }, [firstDay, isLastDayNull, findHolidays, obsReady, getScheduleJson])
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
+      })
+        .then(response => response.json())
+        .then(data => {
+          setSchedule([...data])
+          setColumns([...cols(data)])
+        });
+    });
+  }, [findHolidays])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
@@ -175,31 +172,32 @@ function App () {
           setIsAdmin(false)
         }
       });
-      getSchedule()
-    // fetch("https://vm-www3build:53872/nightstaff", {
-    //   method: 'post',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({'Start': start, 'End': end })
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //   });
-    // fetch("https://vm-www3build:53872/")
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //     findHolidays(data)
-    //   });
-    // fetch("https://vm-www3build:53872/observers")
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setSchedule([...data])
-    //     setColumns([...cols(data)])
-    //   });
-  }, [getSchedule])
+      fetch("https://vm-www3build:53872/file_check")
+        .then(response => response.json())
+        .then(data => {
+          if (data){
+            getInitialSchedule()
+          }else{
+            getSchedule()
+          }
+        })   
+      // fetch("https://vm-www3build:53872/last_day")
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     if (data !== null){
+      //       setLastDay(data)
+      //     }
+      //     if (isLastDayNull() === true){
+      //       getInitialSchedule()
+      //     }else{
+      //       getSchedule()
+      //     }
+      //   })   
+  }, [getInitialSchedule, getSchedule])
+
+  useEffect(() => {
+    get
+  }, [])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
