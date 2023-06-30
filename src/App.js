@@ -116,6 +116,7 @@ function App () {
           }else{
             end = data
           }
+          console.log(firstDay, end)
         }).then(
           fetch("https://vm-www3build:53872/nightstaff", {
             method: 'post',
