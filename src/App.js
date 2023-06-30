@@ -25,17 +25,25 @@ function App () {
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && range[1] !== null){
       fetch("https://vm-www3build:53872/nightstaff", {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        //TODO switch enddate to first day
-        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
-    })
-      .then(response => response.json())
-      .then(data => {
-        // const newsched = data.concat(schedule)
-        // setSchedule([...newsched])
-        setSchedule(data)
-        setDateRange(range)
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'Start': firstDay, 'End': end })
+          })
+          .then(response => response.json())
+          .then(data => {
+            setSchedule([...data])
+            setColumns([...cols(data)])
+            fetch("https://vm-www3build:53872/observers", {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
+            })
+              .then(response => response.json())
+              .then(data => {
+                setSchedule([...data])
+                setColumns([...cols(data)])
+                setDateRange(range)
+            });
         // setColumns([...cols(newsched)])
       });
     }else{
