@@ -130,6 +130,7 @@ function App () {
         .then(data => {
           setSchedule([...data])
           setColumns([...cols(data)])
+          setObsReady(true)
         });
       }else{
         fetch("https://vm-www3build:53872/")
@@ -155,7 +156,7 @@ function App () {
         });
       }
     }
-  }, [firstDay, lastDay, findHolidays, newfile, obsReady])
+  }, [firstDay, lastDay, findHolidays, newfile, obsReady], schedule)
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
