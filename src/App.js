@@ -152,7 +152,7 @@ function App () {
       fetch("https://vm-www3build:53872/observers", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
+        body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': data[-1].Date })
       })
         .then(response => response.json())
         .then(data => {
@@ -175,29 +175,25 @@ function App () {
       fetch("https://vm-www3build:53872/file_check")
         .then(response => response.json())
         .then(data => {
-          if (data){
+          if (data==="False"){
             getInitialSchedule()
           }else{
             getSchedule()
           }
         })   
-      // fetch("https://vm-www3build:53872/last_day")
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     if (data !== null){
-      //       setLastDay(data)
-      //     }
-      //     if (isLastDayNull() === true){
-      //       getInitialSchedule()
-      //     }else{
-      //       getSchedule()
-      //     }
-      //   })   
+      fetch("https://vm-www3build:53872/last_day")
+        .then(response => response.json())
+        .then(data => {
+          if (data !== null){
+            setLastDay(data)
+          }
+          if (isLastDayNull() === true){
+            getInitialSchedule()
+          }else{
+            getSchedule()
+          }
+        })   
   }, [getInitialSchedule, getSchedule])
-
-  useEffect(() => {
-    get
-  }, [])
 
   const onNewSchedule = (data) => {
     setSchedule([...data])
