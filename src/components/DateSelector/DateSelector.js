@@ -13,7 +13,8 @@ const DateSelector = ({ dateRange, filterRange }) => {
         selectsRange={true}
         startDate={startDate}
         endDate={endDate}
-        onChange={(update) => {filterRange(update);}} isClearable={true}
+        onChange={(update) => {filterRange(update);}} 
+        isClearable={true}
         monthsShown={2}
       />
     </div>
