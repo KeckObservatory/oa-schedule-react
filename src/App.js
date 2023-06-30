@@ -37,7 +37,7 @@ function App () {
         console.log(schedule)
         console.log(newsched)
         setSchedule([...newsched])
-        setColumns([...cols(newsched)])
+        // setColumns([...cols(newsched)])
       });
     }
     setDateRange(range)
