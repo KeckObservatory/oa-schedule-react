@@ -24,7 +24,7 @@ function App () {
 
 
   const filterRange = (range) => {
-    console.log(range[0].getFullYear())
+    console.log(new Date(range[0]).getTime())
     setDateRange(range)
     // if (startDate < firstDay){
     //   fetch("https://vm-www3build:53872/nightstaff", {
