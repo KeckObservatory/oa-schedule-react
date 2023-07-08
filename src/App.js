@@ -12,10 +12,7 @@ function App () {
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
   const [observingMeetings, setObservingMeetings] = useState([])
-  // const [obsReady, setObsReady] = useState(false)
-  //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
-  // const [lastDay, setLastDay] = useState(null)
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -28,7 +25,6 @@ function App () {
       fetch("https://vm-www3build:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        //TODO get it to end at schedule
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime(), 'Overlap': false })
     })
       .then(response => response.json())
@@ -36,8 +32,7 @@ function App () {
         const newsched = data.concat(schedule)
         fetch("https://vm-www3build:53872/observers", {
               method: 'post',
-              headers: { 'Content-Type': 'application/json' },
-              //TODO add 1 day to end
+              headers: { 'Content-Type': 'application/json' }
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime()})
             })
               .then(response => response.json())
@@ -50,7 +45,6 @@ function App () {
       fetch("https://vm-www3build:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        //TODO get it to end at schedule
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay, 'Overlap': true})
     })
       .then(response => response.json())
@@ -59,7 +53,6 @@ function App () {
         fetch("https://vm-www3build:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
-              //TODO add 1 day to end
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
             })
               .then(response => response.json())
@@ -147,19 +140,6 @@ function App () {
     setObservingMeetings([...om])
   }, [])
 
-  // const isLastDayNull = useCallback(() => {
-  //   if (lastDay !== null){
-  //     return false
-  //   }
-  //   return true
-  // }, [lastDay])
-
-  // const getScheduleJson = useCallback(() => {
-  //   return schedule
-  // }, [schedule])
-
-  // TODO merge nighstaff and excel reads into something good
-  // TODO make date ranges work with fetches
   const getInitialSchedule = useCallback(() => {
     let end = new Date().setDate(new Date().getDate()+60)
     fetch("https://vm-www3build:53872/nightstaff", {
@@ -210,7 +190,7 @@ function App () {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
-        if(data.Alias==="jpelletier"){
+        if(data.Alias==="jpelletier" || data.Alias==="cjordan"){
           setIsAdmin(true)
         }else{
           setIsAdmin(false)
@@ -225,18 +205,6 @@ function App () {
             getInitialSchedule()
           }
         })   
-      // fetch("https://vm-www3build:53872/last_day")
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     if (data !== null){
-      //       setLastDay(data)
-      //     }
-      //     if (isLastDayNull() === true){
-      //       getInitialSchedule()
-      //     }else{
-      //       getSchedule()
-      //     }
-      //   })   
   }, [getInitialSchedule, getSchedule])
 
   const onNewSchedule = (data) => {
@@ -269,8 +237,6 @@ function App () {
                                  cellInfo.value === "OM" ? "#FFFF64" :
                                  cellInfo.value === "HQ" ? "#2EB22E" :
                                  cellInfo.value === "H" ? "#00D897" :
-                                 // cellInfo.value === null ? "#FFFFFF":
-                                 // (cellInfo.value.toString().startsWith('O') && cellInfo.value.length < 4) ? "#FFFFFF":
                                  null
   
               },
