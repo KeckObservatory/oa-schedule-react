@@ -144,6 +144,7 @@ function App () {
         om.push(data[day].Date)
       }
     }
+    console.log(om)
     setObservingMeetings([...om])
   }, [])
 
