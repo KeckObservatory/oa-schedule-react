@@ -5,7 +5,7 @@ import { ColumnFilter } from './ColumnFilter'
 import { format } from "date-fns"
 import { IndividualDownload } from "../IndividualDownload/IndividualDownload"
 
-export const Table = ({dat, cols, holidays, basepay, today, getCellProps, hiddenColumns=[]}) => {
+export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, hiddenColumns=[]}) => {
 
   const columns = useMemo(() => cols, [cols])
   const data = useMemo(() => dat, [dat])
@@ -107,10 +107,12 @@ export const Table = ({dat, cols, holidays, basepay, today, getCellProps, hidden
                 prepareRow(row)
                 return (
                   <tr className={holidays.includes(row.original.Date) ? "holiday " + row.original.DOW:
+                                 oms.includes(row.original.Date) ? "om " + row.original.DOW:
                                 //TODO figure out why I need to round
                                 Math.round((basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14) === 0 ? "pay "  + row.original.DOW:
                                 row.original.Date === today ? "today "  + row.original.DOW:
                                 holidays.includes(row.original.Date) && row.original.Date === today ? "today holiday"  + row.original.DOW:
+                                oms.includes(row.original.Date) && row.original.Date === today ? "today om"  + row.original.DOW:
                                 Math.round((basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14) && row.original.Date === today ? "today pay"  + row.original.DOW:
                                 row.original.DOW} 
                                 {...row.getRowProps()}>

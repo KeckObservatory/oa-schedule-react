@@ -11,6 +11,7 @@ function App () {
   const [schedule, setSchedule] = useState([])
   const [columns, setColumns] = useState([])
   const [holidays, setHolidays] = useState([])
+  const [observingMeetings, setObservingMeetings] = useState([])
   // const [obsReady, setObsReady] = useState(false)
   //TODO figure out how to integrate this into dateRange without contant reloads
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
@@ -109,7 +110,7 @@ function App () {
             Cell: ({ value }) => { return value.split('/').join(' / ')}
           }
          )
-      }else if (key!=='Holiday'){
+      }else if (key!=='Holiday' && key!=='Mtg'){
         COLUMNS.push(
          {
            Header: key,
@@ -134,6 +135,16 @@ function App () {
       }
     }
     setHolidays([...hol])
+  }, [])
+
+  const findOMs = useCallback((data)=> {
+    const om = []
+    for (var day in data){
+      if(data[day].Holiday === 'OM'){
+        om.push(data[day].Date)
+      }
+    }
+    setObservingMeetings([...om])
   }, [])
 
   // const isLastDayNull = useCallback(() => {
@@ -180,6 +191,7 @@ function App () {
       setSchedule([...data])
       setColumns([...cols(data)])
       findHolidays(data)
+      findOMs(data)
       setFirstDay(data[0].Date)
       fetch("https://vm-www3build:53872/observers", {
         method: 'post',
@@ -192,7 +204,7 @@ function App () {
           setColumns([...cols(data)])
         });
     });
-  }, [findHolidays])
+  }, [findHolidays, findOMs])
 
   useEffect(() => {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
@@ -231,6 +243,7 @@ function App () {
     setSchedule([...data])
     setColumns([...cols(data)])
     findHolidays(data)
+    findOMs(data)
   }
 
   if (schedule.length === 0) {
@@ -247,7 +260,7 @@ function App () {
               <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
             </div>
           </div>
-          <Table dat={filteredSchedule()} cols={columns} holidays={holidays} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
+          <Table dat={filteredSchedule()} cols={columns} holidays={holidays} oms={observingMeetings} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
             getCellProps={cellInfo => ({
               style: {
                 backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :

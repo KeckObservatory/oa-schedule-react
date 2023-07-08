@@ -44,6 +44,10 @@ table tr {
 }
 
 table tr.holiday {
+  background-color: #FFFF64;
+}
+
+table tr.holiday {
   background-color: #fff0db;
 }
 
