@@ -32,7 +32,7 @@ function App () {
         const newsched = data.concat(schedule)
         fetch("https://vm-www3build:53872/observers", {
               method: 'post',
-              headers: { 'Content-Type': 'application/json' }
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime()})
             })
               .then(response => response.json())
