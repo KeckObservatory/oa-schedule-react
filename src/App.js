@@ -28,7 +28,7 @@ function App () {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         //TODO get it to end at schedule
-        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
+        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime(), 'Overlap': false })
     })
       .then(response => response.json())
       .then(data => {
@@ -37,7 +37,7 @@ function App () {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               //TODO add 1 day to end
-              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
+              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime()})
             })
               .then(response => response.json())
               .then(data => {
@@ -50,7 +50,7 @@ function App () {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         //TODO get it to end at schedule
-        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay })
+        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay, 'Overlap': true})
     })
       .then(response => response.json())
       .then(data => {
@@ -59,7 +59,7 @@ function App () {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               //TODO add 1 day to end
-              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
+              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': firstDay })
             })
               .then(response => response.json())
               .then(data => {
@@ -154,7 +154,7 @@ function App () {
     fetch("https://vm-www3build:53872/nightstaff", {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'Start': firstDay, 'End': end })
+            body: JSON.stringify({'Start': firstDay, 'End': end, 'Overlap': false })
           })
           .then(response => response.json())
           .then(data => {
