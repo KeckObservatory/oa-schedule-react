@@ -68,7 +68,7 @@ function App () {
            });
       });
     }else if(startDate !== null && endDate !== null){
-      getSchedule()
+      // getSchedule()
       setDateRange(range)
     }else{
       setDateRange(range)
