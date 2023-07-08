@@ -23,7 +23,7 @@ function App () {
 
 
   const filterRange = (range) => {
-    if (new Date(range[0]).getTime() < firstDay && new Date(range[0]).getTime() < firstDay && range[1] !== null){
+    if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
       fetch("https://vm-www3build:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
