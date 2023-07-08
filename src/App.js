@@ -59,7 +59,7 @@ function App () {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               //TODO add 1 day to end
-              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': firstDay })
+              body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
             })
               .then(response => response.json())
               .then(data => {
