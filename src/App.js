@@ -140,11 +140,10 @@ function App () {
   const findOMs = useCallback((data)=> {
     const om = []
     for (var day in data){
-      if(data[day].Holiday === 'OM'){
+      if(data[day].Mtg === 'OM'){
         om.push(data[day].Date)
       }
     }
-    console.log(om)
     setObservingMeetings([...om])
   }, [])
 
