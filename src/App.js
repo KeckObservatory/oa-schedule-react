@@ -28,7 +28,7 @@ function App () {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         //TODO get it to end at schedule
-        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
+        body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay })
     })
       .then(response => response.json())
       .then(data => {
