@@ -13,6 +13,7 @@ function App () {
   const [holidays, setHolidays] = useState([])
   const [observingMeetings, setObservingMeetings] = useState([])
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
+  const [legend, setLegend] = useState(false)
   //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
@@ -223,6 +224,16 @@ function App () {
           <div className="grid-container">
             <div className="grid-item">
               <DateSelector dateRange={dateRange} filterRange={filterRange}/>
+              <button
+                onMouseEnter={() => setLegend(true)}
+                onMouseLeave={() => setLegend(false)}>
+                Legend
+                {legend && (
+                  <div>
+                    I'll appear when you hover over the button.
+                  </div>
+                )}
+              </button>
             </div>
             <div className="grid-item">
               <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
