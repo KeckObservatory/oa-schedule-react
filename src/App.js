@@ -224,16 +224,18 @@ function App () {
           <div className="grid-container">
             <div className="grid-item">
               <DateSelector dateRange={dateRange} filterRange={filterRange}/>
+            </div>
+            <div className="grid-item">
               <button
-                onMouseEnter={() => setLegend(true)}
-                onMouseLeave={() => setLegend(false)}>
-                Legend
-                {legend && (
-                  <div>
-                    I'll appear when you hover over the button.
-                  </div>
-                )}
-              </button>
+                  onMouseEnter={() => setLegend(true)}
+                  onMouseLeave={() => setLegend(false)}>
+                  Legend
+                  {legend && (
+                    <div>
+                      I'll appear when you hover over the button.
+                    </div>
+                  )}
+                </button>
             </div>
             <div className="grid-item">
               <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
