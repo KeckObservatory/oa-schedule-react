@@ -233,6 +233,7 @@ function App () {
               style: {
                 backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
                                  ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "#7272FD" :
+                                 ["!"].includes(cellInfo.value) ? "#FF0000" :
                                  ["X", "L"].includes(cellInfo.value) ? "#D680D6" :
                                  cellInfo.value === "OM" ? "#FFFF64" :
                                  cellInfo.value === "HQ" ? "#2EB22E" :
