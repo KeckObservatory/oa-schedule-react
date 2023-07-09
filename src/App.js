@@ -236,7 +236,7 @@ function App () {
                                  ["K1!", "K1O!", "K1T!", "R1!", "R1O!", "R1T!", "K2!", "K2O!", "K2T!", "R2!", "R2O!", "R2T!"].includes(cellInfo.value) ? "#FF0000" :
                                  ["X", "L"].includes(cellInfo.value) ? "#D680D6" :
                                  cellInfo.value === "OM" ? "#FFFF64" :
-                                 cellInfo.value === "HQ" ? "#2EB22E" :
+                                 cellInfo.value === "HQ" ? "#708238" :
                                  cellInfo.value === "H" ? "#00D897" :
                                  null
   
