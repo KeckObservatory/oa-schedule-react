@@ -31,10 +31,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   	fetch(
   		'https://vm-www3build:53872/compare_jsons'
     ).then(response => response.json())
-     .then(data => {
-      console.log(data)
-      onNewSchedule(data)}
-      );
+     .then(data => onNewSchedule(data));
   }
 
   if(isAdmin) {
