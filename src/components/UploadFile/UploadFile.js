@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
-  const [isWaiting, setIsWaiting] = useState(true);
+  const [isWaiting, setIsWaiting] = useState(false);
 
 
 	const changeHandler = (event) => {
