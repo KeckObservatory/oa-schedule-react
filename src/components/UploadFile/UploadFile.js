@@ -26,17 +26,19 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
      .then(data => onNewSchedule(data));
   }
 
-  const handleCompare = () => {
-    console.log('comparing...')
-    console.log(isWaiting)
-    setIsWaiting(true)
-  	fetch(
+  const runCompare = () => {
+    fetch(
   		'https://vm-www3build:53872/compare'
     ).then(response => response.json())
      .then(data => {
       onNewSchedule(data)
       setIsWaiting(false)
       console.log(isWaiting)});
+  }
+
+  const handleCompare = () => {
+    setIsWaiting(true)
+    runCompare()
   }
 
   if(isAdmin) {
