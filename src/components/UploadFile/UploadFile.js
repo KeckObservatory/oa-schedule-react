@@ -33,8 +33,9 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   	fetch(
   		'https://vm-www3build:53872/compare'
     ).then(response => response.json())
-     .then(data => onNewSchedule(data));
-     setIsWaiting(false)
+     .then(data => {
+      onNewSchedule(data)
+      setIsWaiting(false)});
   }
 
   if(isAdmin) {
