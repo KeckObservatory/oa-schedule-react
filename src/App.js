@@ -4,6 +4,10 @@ import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import DateSelector from "./components/DateSelector/DateSelector"
 import ErrorBoundry from "./components/ErrorBoundry"
+import Today from 'static/schedToday.PNG'
+import Om from '.static/schedOm.PNG'
+import Pay from 'static/schedPay.PNG'
+import Hol from 'static/schedHol.PNG'
 import { format } from "date-fns"
 import "./App.css"
 
@@ -232,7 +236,10 @@ function App () {
                   Legend
                   {legend && (
                     <>
-                      I'll appear when you hover over the button.
+                      : <img src={Today} alt="today" style={{width:"20px", height:"20px"}} /> Today
+                      / <img src={Om} alt="om" style={{width:"20px", height:"20px"}} /> Meeting
+                      / <img src={Pay} alt="pay" style={{width:"20px", height:"20px"}} /> Pay Period
+                      / <img src={Hol} alt="holiday" style={{width:"20px", height:"20px"}} /> Holiday
                     </>
                   )}
                 </button>
