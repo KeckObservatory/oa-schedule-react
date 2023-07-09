@@ -28,6 +28,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const handleCompare = () => {
     setIsWaiting(true)
+    console.log(isWaiting)
 
     console.log('comparing...')
   	fetch(
@@ -35,7 +36,8 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
     ).then(response => response.json())
      .then(data => {
       onNewSchedule(data)
-      setIsWaiting(false)});
+      setIsWaiting(false)
+      console.log(isWaiting)});
   }
 
   if(isAdmin) {
