@@ -236,10 +236,10 @@ function App () {
                   Legend
                   {legend && (
                     <>
-                      : <img src={Today} alt="today" style={{width:"15px", height:"15px"}} /> Today
-                      / <img src={Om} alt="om" style={{width:"15px", height:"15px"}} /> Meeting
-                      / <img src={Pay} alt="pay" style={{width:"15px", height:"15px"}} /> Pay Period
-                      / <img src={Hol} alt="holiday" style={{width:"15px", height:"15px"}} /> Holiday
+                      : <img src={Today} alt="today" style={{width:"10px", height:"10px"}} /> Today
+                      / <img src={Om} alt="om" style={{width:"10px", height:"10px"}} /> Meeting
+                      / <img src={Pay} alt="pay" style={{width:"10px", height:"10px"}} /> Pay Period
+                      / <img src={Hol} alt="holiday" style={{width:"10px", height:"10px"}} /> Holiday
                     </>
                   )}
                 </button>
