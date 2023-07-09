@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
-  const [isWaiting, setIsWaiting] = useState(true);
+  const [isWaiting, setIsWaiting] = useState(false);
 
 
 	const changeHandler = (event) => {
@@ -35,13 +35,13 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
     ).then(response => response.json())
      .then(data => {
       onNewSchedule(data)
-      console.log(isWaiting)});
+      setIsWaiting(false)});
   }
 
   if(isAdmin) {
   	return(
       <div className='tr'>
-        <button disable={isWaiting} onClick={handleCompare}>Compare with Telescope Schedule</button>
+        <button disabled={isWaiting} onClick={handleCompare}>Compare with Telescope Schedule</button>
       	<input type="file" name="file" onChange={changeHandler} />
       	<button onClick={handleSubmission}>Submit</button>
       </div>
