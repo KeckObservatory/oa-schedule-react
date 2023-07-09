@@ -237,7 +237,7 @@ function App () {
                                  ["X", "L"].includes(cellInfo.value) ? "#E8B6EC" :
                                  cellInfo.value === "OM" ? "#FFFF64" :
                                  cellInfo.value === "HQ" ? "#9DC183" :
-                                 cellInfo.value === "H" ? "#00D897" :
+                                //  cellInfo.value === "H" ? "#00D897" :
                                  null
   
               },
