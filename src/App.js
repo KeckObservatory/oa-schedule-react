@@ -234,7 +234,7 @@ function App () {
                 backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
                                  ["K2", "K2O", "K2T", "R2", "R2O", "R2T"].includes(cellInfo.value) ? "#7272FD" :
                                  ["K1!", "K1O!", "K1T!", "R1!", "R1O!", "R1T!", "K2!", "K2O!", "K2T!", "R2!", "R2O!", "R2T!"].includes(cellInfo.value) ? "#FF0000" :
-                                 ["X", "L"].includes(cellInfo.value) ? "#9E7BB3" :
+                                 ["X", "L"].includes(cellInfo.value) ? "#B47EE5" :
                                  cellInfo.value === "OM" ? "#FFFF64" :
                                  cellInfo.value === "HQ" ? "#9DC183" :
                                  cellInfo.value === "H" ? "#00D897" :
