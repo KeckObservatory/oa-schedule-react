@@ -27,10 +27,9 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   }
 
   const handleCompare = () => {
-    setIsWaiting(true)
-    console.log(isWaiting)
-
     console.log('comparing...')
+    console.log(isWaiting)
+    setIsWaiting(true)
   	fetch(
   		'https://vm-www3build:53872/compare'
     ).then(response => response.json())
