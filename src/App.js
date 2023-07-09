@@ -231,9 +231,9 @@ function App () {
                   onMouseLeave={() => setLegend(false)}>
                   Legend
                   {legend && (
-                    <div>
+                    <>
                       I'll appear when you hover over the button.
-                    </div>
+                    </>
                   )}
                 </button>
             </div>
