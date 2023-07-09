@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const [selectedFile, setSelectedFile] = useState();
-  const [isWaiting, setIsWaiting] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(true);
 
 
 	const changeHandler = (event) => {
@@ -28,7 +28,6 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
 
   const handleCompare = () => {
     console.log('comparing...')
-    console.log(isWaiting)
     setIsWaiting(true)
   	fetch(
   		'https://vm-www3build:53872/compare'
