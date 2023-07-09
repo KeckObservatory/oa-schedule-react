@@ -4,10 +4,10 @@ import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
 import DateSelector from "./components/DateSelector/DateSelector"
 import ErrorBoundry from "./components/ErrorBoundry"
-import Today from './static/schedToday.PNG'
-import Om from './static/schedOm.PNG'
-import Pay from './static/schedPay.PNG'
-import Hol from './static/schedHol.PNG'
+import Today from 'static/schedToday.PNG'
+import Om from 'static/schedOm.PNG'
+import Pay from 'tatic/schedPay.PNG'
+import Hol from 'static/schedHol.PNG'
 import { format } from "date-fns"
 import "./App.css"
 
