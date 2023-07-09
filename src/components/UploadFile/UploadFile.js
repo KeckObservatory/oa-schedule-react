@@ -25,9 +25,19 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
      .then(data => onNewSchedule(data));
   }
 
+  const handleCompare = () => {
+
+    console.log('comparing...')
+  	fetch(
+  		'https://vm-www3build:53872/compare_jsons'
+    ).then(response => response.json())
+     .then(data => onNewSchedule(data));
+  }
+
   if(isAdmin) {
   	return(
       <div className='tr'>
+        <button onClick={handleCompare}>Compare with Telescope Schedule</button>
       	<input type="file" name="file" onChange={changeHandler} />
       	<button onClick={handleSubmission}>Submit</button>
       </div>
