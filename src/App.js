@@ -27,7 +27,7 @@ function App () {
 
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
-      fetch("https://vm-www3build:53872/nightstaff", {
+      fetch("https://vm-oas:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime(), 'Overlap': false })
@@ -35,7 +35,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         const newsched = data.concat(schedule)
-        fetch("https://vm-www3build:53872/observers", {
+        fetch("https://vm-oas:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime()})
@@ -47,7 +47,7 @@ function App () {
            });
       });
     }else if (new Date(range[0]).getTime() < firstDay && range[1] !== null){
-      fetch("https://vm-www3build:53872/nightstaff", {
+      fetch("https://vm-oas:53872/nightstaff", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay, 'Overlap': true})
@@ -55,7 +55,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         const newsched = data.concat(schedule)
-        fetch("https://vm-www3build:53872/observers", {
+        fetch("https://vm-oas:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
@@ -147,7 +147,7 @@ function App () {
 
   const getInitialSchedule = useCallback(() => {
     let end = new Date().setDate(new Date().getDate()+60)
-    fetch("https://vm-www3build:53872/nightstaff", {
+    fetch("https://vm-oas:53872/nightstaff", {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'Start': firstDay, 'End': end, 'Overlap': false })
@@ -156,7 +156,7 @@ function App () {
           .then(data => {
             setSchedule([...data])
             setColumns([...cols(data)])
-            fetch("https://vm-www3build:53872/observers", {
+            fetch("https://vm-oas:53872/observers", {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
@@ -170,7 +170,7 @@ function App () {
     }, [firstDay])
 
   const getSchedule = useCallback(() => {
-    fetch("https://vm-www3build:53872/")
+    fetch("https://vm-oas:53872/")
     .then(response => response.json())
     .then(data => {
       setSchedule([...data])
@@ -178,7 +178,7 @@ function App () {
       findHolidays(data)
       findOMs(data)
       setFirstDay(data[0].Date)
-      fetch("https://vm-www3build:53872/observers", {
+      fetch("https://vm-oas:53872/observers", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Schedule': data, 'Start': data[0].Date, 'End': data[data.length-1].Date })
@@ -201,7 +201,7 @@ function App () {
           setIsAdmin(false)
         }
       });
-      fetch("https://vm-www3build:53872/file_check")
+      fetch("https://vm-oas:53872/file_check")
         .then(response => response.json())
         .then(data => {
           if (data.File){
