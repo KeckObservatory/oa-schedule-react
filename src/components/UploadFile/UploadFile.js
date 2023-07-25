@@ -17,7 +17,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   	formData.append('file', selectedFile);
 
   	fetch(
-  		'https://vm-www3build:53872/update_schedule',
+  		'https://vm-oas:53872/update_schedule',
   		{
   			method: 'POST',
         body: formData
@@ -30,7 +30,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
     console.log('comparing...')
     setIsWaiting(true)
   	fetch(
-  		'https://vm-www3build:53872/compare'
+  		'https://vm-oas:53872/compare'
     ).then(response => response.json())
      .then(data => {
       onNewSchedule(data)
