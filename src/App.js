@@ -25,7 +25,7 @@ function App () {
   const dataFetchedRef = useRef(false);
 
   // const api ="/api/oa-schedule";
-  const api = "/api/oa-schedule"
+  const api = "https://vm-oas:53872"
 
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
@@ -196,7 +196,7 @@ function App () {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    fetch('https://www3build.keck.hawaii.edu/staffinfo')
+    fetch('/staffinfo')
       .then(response => response.json())
       .then(data => {
         fetch(`${api}/is_admin`, {
