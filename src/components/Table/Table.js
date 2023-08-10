@@ -5,7 +5,7 @@ import { ColumnFilter } from './ColumnFilter'
 import { format } from "date-fns"
 import { IndividualDownload } from "../IndividualDownload/IndividualDownload"
 
-export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, hiddenColumns=[]}, api) => {
+export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, hiddenColumns=[], api}) => {
 
   const columns = useMemo(() => cols, [cols])
   const data = useMemo(() => dat, [dat])
