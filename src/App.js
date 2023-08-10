@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Table } from "./components/Table/Table";
 import { UploadFile } from "./components/UploadFile/UploadFile"
