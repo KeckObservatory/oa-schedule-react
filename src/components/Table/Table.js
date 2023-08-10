@@ -86,7 +86,7 @@ export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, h
               </select>
             </div>
             <div className="grid-item">
-              <IndividualDownload names={allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG')} />
+              <IndividualDownload names={allColumns.filter(column => column.id.length < 4 && column.id !== 'DOW' && column.id !== 'MTG')} api={api} />
             </div>
           </div>
         </div>

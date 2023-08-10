@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const UploadFile = ({ isAdmin, onNewSchedule }) => {
+export const UploadFile = ({ isAdmin, onNewSchedule, api }) => {
 
   const [selectedFile, setSelectedFile] = useState();
   const [isWaiting, setIsWaiting] = useState(false);
@@ -17,7 +17,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
   	formData.append('file', selectedFile);
 
   	fetch(
-  		'https://vm-oas:53872/update_schedule',
+  		`${api}/update_schedule`,
   		{
   			method: 'POST',
         body: formData
@@ -30,7 +30,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule }) => {
     console.log('comparing...')
     setIsWaiting(true)
   	fetch(
-  		'https://vm-oas:53872/compare'
+  		`${api}/compare`
     ).then(response => response.json())
      .then(data => {
       onNewSchedule(data)

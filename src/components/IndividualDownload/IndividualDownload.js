@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-export const IndividualDownload = ({names}) => {
+export const IndividualDownload = ({names, api}) => {
 
   const customStyles = {
     content: {
@@ -28,7 +28,7 @@ export const IndividualDownload = ({names}) => {
 
   const individualDownload = (name) => {
     fetch(
-      'http://98.151.209.95:5000/get-employee-schedule',
+      `${api}/get-employee-schedule`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

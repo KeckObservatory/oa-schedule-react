@@ -24,10 +24,11 @@ function App () {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
+  const api ="https://vm-oas:53872";
 
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
-      fetch("https://vm-oas:53872/nightstaff", {
+      fetch(`${api}/nightstaff`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime(), 'Overlap': false })
@@ -35,7 +36,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         const newsched = data.concat(schedule)
-        fetch("https://vm-oas:53872/observers", {
+        fetch(`${api}/observers`, {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime()})
@@ -47,7 +48,7 @@ function App () {
            });
       });
     }else if (new Date(range[0]).getTime() < firstDay && range[1] !== null){
-      fetch("https://vm-oas:53872/nightstaff", {
+      fetch(`${api}/nightstaff`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Start': new Date(range[0]).getTime(), 'End': firstDay, 'Overlap': true})
@@ -55,7 +56,7 @@ function App () {
       .then(response => response.json())
       .then(data => {
         const newsched = data.concat(schedule)
-        fetch("https://vm-oas:53872/observers", {
+        fetch(`${api}/observers`, {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': newsched, 'Start': new Date(range[0]).getTime(), 'End': new Date(range[1]).getTime() })
@@ -147,7 +148,7 @@ function App () {
 
   const getInitialSchedule = useCallback(() => {
     let end = new Date().setDate(new Date().getDate()+60)
-    fetch("https://vm-oas:53872/nightstaff", {
+    fetch(`${api}/nightstaff`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'Start': firstDay, 'End': end, 'Overlap': false })
@@ -156,7 +157,7 @@ function App () {
           .then(data => {
             setSchedule([...data])
             setColumns([...cols(data)])
-            fetch("https://vm-oas:53872/observers", {
+            fetch(`${api}/observers`, {
               method: 'post',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({'Schedule': data, 'Start': firstDay, 'End': end })
@@ -170,7 +171,7 @@ function App () {
     }, [firstDay])
 
   const getSchedule = useCallback(() => {
-    fetch("https://vm-oas:53872/")
+    fetch(`${api}:53872/`)
     .then(response => response.json())
     .then(data => {
       setSchedule([...data])
@@ -178,7 +179,7 @@ function App () {
       findHolidays(data)
       findOMs(data)
       setFirstDay(data[0].Date)
-      fetch("https://vm-oas:53872/observers", {
+      fetch(`${api}/observers`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'Schedule': data, 'Start': data[0].Date, 'End': data[data.length-1].Date })
@@ -201,7 +202,7 @@ function App () {
           setIsAdmin(false)
         }
       });
-      fetch("https://vm-oas:53872/file_check")
+      fetch(`${api}/file_check`)
         .then(response => response.json())
         .then(data => {
           if (data.File){
@@ -245,10 +246,10 @@ function App () {
                 </button>
             </div>
             <div className="grid-item">
-              <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule}/>
+              <UploadFile isAdmin={isAdmin} onNewSchedule={onNewSchedule} api={api}/>
             </div>
           </div>
-          <Table dat={filteredSchedule()} cols={columns} holidays={holidays} oms={observingMeetings} basepay={new Date("2022-01-02")} today={convertTime(new Date())}
+          <Table dat={filteredSchedule()} cols={columns} holidays={holidays} oms={observingMeetings} basepay={new Date("2022-01-02")} today={convertTime(new Date())} api={api}
             getCellProps={cellInfo => ({
               style: {
                 backgroundColor: ["K1", "K1O", "K1T", "R1", "R1O", "R1T"].includes(cellInfo.value) ? "#FFC863" :
