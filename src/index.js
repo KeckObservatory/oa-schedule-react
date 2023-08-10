@@ -6,11 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
 ReactDOM.render(
-  <>
+  <React.StrictMode>
     <App />
-    document.getElementById('root')
-  </>
-  
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
