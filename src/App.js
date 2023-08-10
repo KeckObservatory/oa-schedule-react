@@ -171,7 +171,7 @@ function App () {
     }, [firstDay])
 
   const getSchedule = useCallback(() => {
-    fetch(`${api}:53872/`)
+    fetch(`${api}/`)
     .then(response => response.json())
     .then(data => {
       setSchedule([...data])
