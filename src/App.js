@@ -24,7 +24,8 @@ function App () {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
-  const api ="/api/oa-schedule";
+  // const api ="/api/oa-schedule";
+  const api = "https://vm-oas:53872"
 
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
