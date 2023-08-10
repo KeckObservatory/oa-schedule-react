@@ -197,7 +197,7 @@ function App () {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
-        fetch(`${api}/nightstaff`, {
+        fetch(`${api}/is_admin`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({'Username': data.Alias})
