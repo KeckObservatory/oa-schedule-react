@@ -24,8 +24,7 @@ function App () {
   const [startDate, endDate] = dateRange;
   const dataFetchedRef = useRef(false);
 
-  // const api ="/api/oa-schedule";
-  const api = "https://vm-oas:53872"
+  const api ="/api/oa-schedule";
 
   const filterRange = (range) => {
     if (new Date(range[0]).getTime() < firstDay && new Date(range[1]).getTime() < firstDay && range[1] !== null){
