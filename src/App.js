@@ -205,17 +205,20 @@ function App () {
         .then(response => response.json())
         .then(data => {
             setIsAdmin(data.Admin)
-         });
+         })
+        .then(
+          fetch(`${api}/file_check`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.File){
+              getSchedule()
+            }else{
+              getInitialSchedule()
+            }
+          })
+        )
       });
-      fetch(`${api}/file_check`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.File){
-            getSchedule()
-          }else{
-            getInitialSchedule()
-          }
-        })   
+         
   }, [getInitialSchedule, getSchedule])
 
   const onNewSchedule = (data) => {
