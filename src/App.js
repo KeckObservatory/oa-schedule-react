@@ -23,6 +23,7 @@ function App () {
   const [isAdmin, setIsAdmin] = useState(false)
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const dataFetchedRef = useRef(false);
 
   // const api ="/api/oa-schedule";
   const api = "https://vm-oas:53872"
@@ -194,6 +195,8 @@ function App () {
   }, [findHolidays, findOMs])
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
