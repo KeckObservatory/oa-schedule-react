@@ -197,11 +197,15 @@ function App () {
     fetch('https://www3build.keck.hawaii.edu/staffinfo')
       .then(response => response.json())
       .then(data => {
-        if(data.Alias==="jpelletier" || data.Alias==="cjordan"){
-          setIsAdmin(true)
-        }else{
-          setIsAdmin(false)
-        }
+        fetch(`${api}/nightstaff`, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({'Username': data.Alias})
+        })
+        .then(response => response.json())
+        .then(data => {
+            setIsAdmin(data.Admin)
+         });
       });
       fetch(`${api}/file_check`)
         .then(response => response.json())
