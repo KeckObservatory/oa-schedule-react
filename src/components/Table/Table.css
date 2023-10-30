@@ -24,19 +24,6 @@ table td, #table th {
   padding: 5px;
 }
 
-
-/* table tr.SUN, tr.SAT {
-  background-color: #97B4D3;
-}
-
-table tr.MON, tr.WED, tr.FRI {
-  background-color: #FFFFFF;
-}
-
-table tr.TUE, tr.THU {
-  background-color: #C6D8EB;
-} */
-
 table tr {
   background-color: #FFFFFF;
   border-style: solid;
@@ -99,9 +86,3 @@ div.checkmark {
   max-height: 1px;
   height: 100%;
 }
-
-
-
-/* div.isobuttons {
-  display: inline-block;
-} */
