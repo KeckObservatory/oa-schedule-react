@@ -32,10 +32,6 @@ export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, h
     setHiddenColumns(hiddenColumns)
   }
 
-  // const isolateColumn = (line) => {
-  //   console.log(line)
-  // }
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -108,7 +104,6 @@ export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, h
                 return (
                   <tr className={holidays.includes(row.original.Date) ? "holiday " + row.original.DOW:
                                  oms.includes(row.original.Date) ? "om " + row.original.DOW:
-                                //TODO figure out why I need to round
                                 Math.round((basepay.getTime() - new Date(row.original.Date).getTime())/(1000*3600*24)%14) === 0 ? "pay "  + row.original.DOW:
                                 row.original.Date === today ? "today "  + row.original.DOW:
                                 holidays.includes(row.original.Date) && row.original.Date === today ? "today holiday"  + row.original.DOW:

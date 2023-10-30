@@ -53,5 +53,3 @@ export const UploadFile = ({ isAdmin, onNewSchedule, api }) => {
   }
 }
 
-
-//TODO add onClick={() => onRouteChange('signin')}  back to admin button after testing
