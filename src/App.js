@@ -17,7 +17,6 @@ function App () {
   const [observingMeetings, setObservingMeetings] = useState([])
   const [firstDay, setFirstDay] = useState(new Date().setDate(new Date().getDate()-14))
   const [legend, setLegend] = useState(false)
-  //TODO figure out why I have to ignore this
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(false)
   const [dateRange, setDateRange] = useState([null, null]);
@@ -267,7 +266,6 @@ function App () {
                                  ["X", "L"].includes(cellInfo.value) ? "#E8B6EC" :
                                  cellInfo.value === "OM" ? "#FFFF64" :
                                  cellInfo.value === "HQ" ? "#9DC183" :
-                                //  cellInfo.value === "H" ? "#00D897" :
                                  null
   
               },
