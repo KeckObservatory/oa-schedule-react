@@ -19,7 +19,7 @@ export const UploadFile = ({ isAdmin, onNewSchedule, api }) => {
     fetch('/staffinfo')
       .then(response => response.json())
       .then(data => {
-        formData.append(JSON.stringify({'Username': data.Alias}));
+        formData.append('user', JSON.stringify({'Username': data.Alias}));
         fetch(
           `${api}/update_schedule`,
           {
