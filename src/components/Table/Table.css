@@ -64,7 +64,7 @@ table th, tfoot td {
   border-top: none
 }
 
-input[type="checkbox"]{
+.columndelete {
     -webkit-appearance: initial;
     appearance: initial;
     background: #CADAED;
@@ -74,7 +74,7 @@ input[type="checkbox"]{
     position: relative;
 }
 
-input[type="checkbox"]:before {
+.columndelete:before {
     content: '-';
     position: absolute;
     top: -0.25em;
