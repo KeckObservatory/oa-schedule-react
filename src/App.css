@@ -16,13 +16,3 @@ body{
   padding-right: 5px;
   padding-left: 5px;
 }
-
-input[type="checkbox"]{
-  -webkit-appearance: initial;
-  appearance: initial;
-  background: #CADAED;
-  width: 10px;
-  height: 10px;
-  border: none;
-  position: relative;
-}

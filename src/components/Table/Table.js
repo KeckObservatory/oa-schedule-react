@@ -92,7 +92,7 @@ export const Table = ({dat, cols, holidays, oms, basepay, today, getCellProps, h
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map( (column) => (
-                    <th {...column.getHeaderProps()}><div className="checkmark"><input type='checkbox' {...column.getToggleHiddenProps()} /></div><br></br>{column.render('Header')}
+                    <th {...column.getHeaderProps()}><div className="checkmark"><input type='checkbox' className='columndelete' {...column.getToggleHiddenProps()} /></div><br></br>{column.render('Header')}
                       <div>{column.canFilter ? column.render('Filter') : null}</div>
                     </th>))}
                 </tr>
