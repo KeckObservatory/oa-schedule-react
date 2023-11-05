@@ -16,14 +16,19 @@ export const UploadFile = ({ isAdmin, onNewSchedule, api }) => {
 
   	formData.append('file', selectedFile);
 
-  	fetch(
-  		`${api}/update_schedule`,
-  		{
-  			method: 'POST',
-        body: formData
-  	  }
-    ).then(response => response.json())
-     .then(data => onNewSchedule(data));
+    fetch('/staffinfo')
+      .then(response => response.json())
+      .then(data => {
+        formData.append(JSON.stringify({'Username': data.Alias}));
+        fetch(
+          `${api}/update_schedule`,
+          {
+            method: 'POST',
+            body: formData
+          }
+        ).then(response => response.json())
+        .then(data => onNewSchedule(data));
+      })
   }
 
   const handleCompare = () => {
