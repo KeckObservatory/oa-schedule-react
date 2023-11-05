@@ -65,8 +65,8 @@ table th, tfoot td {
 }
 
 input[type="checkbox"]{
-    /* -webkit-appearance: initial;
-    appearance: initial; */
+    /* -webkit-appearance: initial; */
+    appearance: initial;
     background: #CADAED;
     width: 10px;
     height: 10px;
